@@ -124,7 +124,7 @@
       </v-col>
       <v-col cols="6">
         <v-container>
-          <ul class="list-group">
+          <ul ref="copy_code" class="list-group">
             <v-row>
               <v-col cols="3"><h2>Code:</h2></v-col>
               <v-col cols="9" align="end">
@@ -270,7 +270,12 @@ export default {
     },
 
     copyToClipBoard() {
-      console.log("copied");
+      try {
+        this.$copyText(this.$refs.copy_code.innerText);
+        console.log(this.$refs.copy_code.innerText);
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };

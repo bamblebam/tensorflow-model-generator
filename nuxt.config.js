@@ -62,7 +62,8 @@ export default {
     ],
     ['nuxt-highlightjs', {
       style: 'obsidian'
-    }]
+    }],
+    'nuxt-clipboard2',
   ],
 
 
