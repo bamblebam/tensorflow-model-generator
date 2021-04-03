@@ -49,12 +49,12 @@
               color="#ff9000"
               @click="saveModel"
             >
-              <v-text class="savemodel">Save Model</v-text>
+              <v-card-text class="savemodel">Save Model</v-card-text>
             </v-btn>
           </v-col>
           <v-col>
             <v-btn color="#ff9000" @click="saveModel">
-              <v-text class="savemodel">Discard Model</v-text>
+              <v-card-text class="savemodel">Discard Model</v-card-text>
             </v-btn>
           </v-col>
         </v-row>
@@ -169,6 +169,7 @@ export default {
       response_hyperparameter: {},
       response: {},
       edited: false,
+      saveEdited: false,
       index: 0,
       project_name: "",
       user: null
@@ -180,8 +181,9 @@ export default {
     var projectName = this.$store.state.model.model_name;
     this.user = this.$store.state.user;
     if (model) {
-      this.layer_state = model;
+      this.layer_state = [...model];
       this.project_name = projectName;
+      this.saveEdited = true;
     }
   },
 
@@ -227,6 +229,7 @@ export default {
           ].hyperparameters[name].value;
         }
       }
+
       this.response = {
         name: this.layerName,
         hyperparameter: this.response_hyperparameter
@@ -244,7 +247,13 @@ export default {
 
     saveModel() {
       if (this.layer_state && this.$store.state.user) {
-        var uid = uuidv4();
+        var uid;
+        if (!this.saveEdited) {
+          uid = uuidv4();
+        } else {
+          uid = this.$store.state.model.uid;
+          this.saveEdited = false;
+        }
         var model_name = this.project_name;
         console.log(model_name);
         const userref = firebase
@@ -279,6 +288,7 @@ export default {
     },
 
     discardModel() {
+      this.saveEdited = false;
       this.response_hyperparameter = {};
       this.response = {};
       this.layer_state = [];
