@@ -27,6 +27,7 @@
                   <Card
                     v-bind:layerData="layer"
                     v-bind:method="removeLayer"
+                    v-bind:edit="editLayer"
                     v-bind:index="index"
                   />
                 </v-row>
@@ -152,7 +153,10 @@ export default {
       layerName: "Dense",
       layerNames: Object.keys(layers),
       response_hyperparameter: {},
-      response: {}
+      response: {},
+      edited: false,
+      index: 0,
+      projectName: ""
     };
   },
 
@@ -164,6 +168,7 @@ export default {
   methods: {
     layerToPython(object) {
       console.log(object);
+
       var line = `${object.name}(`;
       for (let [key, value] of Object.entries(object.hyperparameter)) {
         line += key + " = " + value + ", ";
@@ -179,9 +184,15 @@ export default {
         name: this.layerName,
         hyperparameter: this.response_hyperparameter
       };
-      this.layer_state.push(this.response);
+
       this.response = {};
       this.response_hyperparameter = {};
+      this.layer_state.push(this.response);
+      // if (!this.edited) {
+      // } else {
+      //   this.layer_state.splice(this.index, 0, this.response);
+      //   this.edited = false;
+      // }
     },
 
     saveModel() {
@@ -196,6 +207,18 @@ export default {
     removeLayer(index) {
       this.$delete(this.layer_state, index);
     },
+
+    editLayer(index) {
+      for (const hyper in this.layer_state[index].hyperparameter) {
+        this.response_hyperparameter[hyper] = this.layer_state[
+          index
+        ].hyperparameter[hyper];
+      }
+      this.layerName = this.layer_state[index].name;
+      this.dialog = true;
+      this.edited = true;
+    },
+
     copyToClipBoard() {
       console.log("copied");
     }
