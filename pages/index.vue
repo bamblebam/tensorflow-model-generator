@@ -24,7 +24,9 @@
         <v-btn color="#ff7000 " @click="dialog = true">
           <v-icon color="white">mdi-plus-thick</v-icon>
         </v-btn>
-
+        <v-btn color="#ff7000 " @click="saveModel">
+          <v-icon color="black">mdi-plus-thick</v-icon>
+        </v-btn>
         <v-dialog v-model="dialog" max-width="700">
           <v-card>
             <v-card-title class="headline"> Layer name </v-card-title>
@@ -96,6 +98,8 @@
 import Card from "@/components/Card";
 import SignInButton from "@/components/SignInButton";
 import layers from "@/tensorflow_data/tensorflow_data";
+import * as firebase from "firebase/app";
+import "firebase/firestore";
 
 export default {
   data() {
@@ -139,6 +143,15 @@ export default {
       this.layer_state.push(this.response);
       this.response = {};
       this.response_hyperparameter = {};
+    },
+
+    saveModel() {
+      console.log("bam1");
+      if (this.layer_state) {
+        console.log(this.response);
+        firebase.firestore.collection("models").add(this.layer_state);
+        console.log("bam2");
+      }
     },
 
     removeLayer(index) {
