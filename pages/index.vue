@@ -13,30 +13,33 @@
     </v-row>
     <v-row>
       <v-col cols="6">
+        <h2>Layers:</h2>
+
         <v-row>
           <v-col cols="12">
-            <h2>Layers:</h2>
-            <draggable
-              v-model="layer_state"
-              group="layers"
-              @start="drag = true"
-              @end="drag = false"
-            >
-              <v-item v-for="(layer, index) in layer_state" :key="index">
-                <v-row no-gutters>
-                  <Card
-                    v-bind:layerData="layer"
-                    v-bind:method="removeLayer"
-                    v-bind:edit="editLayer"
-                    v-bind:index="index"
-                  />
-                </v-row>
-              </v-item>
-            </draggable>
+            <v-card class="overflow-y-auto" max-height="400">
+              <draggable
+                v-model="layer_state"
+                group="layers"
+                @start="drag = true"
+                @end="drag = false"
+              >
+                <v-item v-for="(layer, index) in layer_state" :key="index">
+                  <v-row no-gutters>
+                    <Card
+                      v-bind:layerData="layer"
+                      v-bind:method="removeLayer"
+                      v-bind:edit="editLayer"
+                      v-bind:index="index"
+                    />
+                  </v-row>
+                </v-item>
+              </draggable>
+            </v-card>
           </v-col>
         </v-row>
 
-        <v-row>
+        <v-row align="center">
           <v-col>
             <v-btn class="mx-2" fab dark color="#ff7000" @click="dialog = true">
               <v-icon dark> mdi-plus </v-icon>
@@ -44,17 +47,15 @@
           </v-col>
           <v-col>
             <v-btn
-              v-if="layer_state.length > 0 && this.$store.state.user !== null"
+              v-if="this.$store.state.user !== null"
               color="#ff9000"
               @click="saveModel"
             >
               <v-text class="savemodel">Save Model</v-text>
             </v-btn>
-            <v-btn
-              v-if="layer_state.length > 0"
-              color="#ff9000"
-              @click="saveModel"
-            >
+          </v-col>
+          <v-col>
+            <v-btn color="#ff9000" @click="saveModel">
               <v-text class="savemodel">Discard Model</v-text>
             </v-btn>
           </v-col>
@@ -122,6 +123,7 @@
           </v-card>
         </v-dialog>
       </v-col>
+
       <v-col cols="6">
         <v-container>
           <ul ref="copy_code" class="list-group">
@@ -170,23 +172,24 @@ export default {
       response: {},
       edited: false,
       index: 0,
-      projectName: "",
-      user: null,
+      project_name: "",
+      user: null
     };
   },
 
   mounted() {
-    var model = this.$store.state.model.layers;
+    var model = this.$store.state.model;
     this.user = this.$store.state.user;
     if (model) {
-      this.layer_state = model;
+      this.layer_state = model.layers;
+      this.project_name = model.model_name;
     }
   },
 
   components: {
     Card,
     draggable,
-    SignInButton,
+    SignInButton
   },
   methods: {
     layerToPython(object) {
@@ -203,9 +206,31 @@ export default {
 
     addLayer() {
       this.dialog = false;
+      let keys = Object.keys(this.response_hyperparameter);
+      console.log(keys);
+      let keys2 = Object.keys(
+        this.layersTemplate[this.layerName].hyperparameters
+      );
+      console.log(keys2);
+
+      for (const key in keys2) {
+        let name = keys2[key];
+        console.log(name);
+
+        if (keys.includes(name)) {
+          continue;
+        } else {
+          console.log(
+            this.layersTemplate[this.layerName].hyperparameters[name].value
+          );
+          this.response_hyperparameter[name] = this.layersTemplate[
+            this.layerName
+          ].hyperparameters[name].value;
+        }
+      }
       this.response = {
         name: this.layerName,
-        hyperparameter: this.response_hyperparameter,
+        hyperparameter: this.response_hyperparameter
       };
 
       if (!this.edited) {
@@ -227,7 +252,7 @@ export default {
           .firestore()
           .collection("users")
           .doc(this.$store.state.user.uid);
-        userref.get().then((doc) => {
+        userref.get().then(doc => {
           if (!doc.exists) {
             userref.set({ models: [uid], ...this.$store.state.user });
           }
@@ -237,7 +262,7 @@ export default {
           .collection("users")
           .doc(this.$store.state.user.uid)
           .update({
-            models: firebase.firestore.FieldValue.arrayUnion(uid),
+            models: firebase.firestore.FieldValue.arrayUnion(uid)
           });
         firebase
           .firestore()
@@ -266,6 +291,7 @@ export default {
           index
         ].hyperparameter[hyper];
       }
+      this.index = index;
       this.layerName = this.layer_state[index].name;
       this.dialog = true;
       this.edited = true;
@@ -288,8 +314,8 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -310,7 +336,7 @@ export default {
   transform: scale(0.8);
 }
 .list-group {
-  margin-top: 1rem;
+  margin-top: 2.3rem;
   border: 1px solid #5e5d5c;
   padding-left: 5rem;
   padding: 1rem;
