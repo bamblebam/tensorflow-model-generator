@@ -1,7 +1,7 @@
 <template>
   <ul class="list-group">
-    <li class="list-group-item" v-for="layer in layers" :key="layer">
-      {{ layer.name }}
+    <li class="list-group-item" v-for="(layer, index) in layers" :key="index">
+      {{ layerToPython(layer) }}
     </li>
   </ul>
 </template>
@@ -20,6 +20,17 @@ export default {
   components: {
     Logo,
     VuetifyLogo,
+  },
+  methods: {
+    layerToPython(object) {
+      var line = `${object.name}(`;
+      for (let [key, value] of Object.entries(object.hyperparameters)) {
+        line += key + " = " + value.value + ",";
+      }
+      line = line.substring(0, line.length - 1);
+      line += ")";
+      return line;
+    },
   },
 };
 </script>
