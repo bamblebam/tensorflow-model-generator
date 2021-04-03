@@ -113,7 +113,7 @@
 import Card from "@/components/Card";
 import SignInButton from "@/components/SignInButton";
 import layers from "@/tensorflow_data/tensorflow_data";
-import * as firebase from "firebase/app";
+import firebase from "firebase/app";
 import "firebase/firestore";
 import draggable from "vuedraggable";
 
@@ -166,7 +166,10 @@ export default {
       console.log("bam1");
       if (this.layer_state) {
         console.log(this.response);
-        firebase.firestore.collection("models").add(this.layer_state);
+        firebase
+          .firestore()
+          .collection("models")
+          .add({ ...this.layer_state });
         console.log("bam2");
       }
     },
