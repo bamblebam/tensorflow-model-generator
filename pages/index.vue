@@ -169,12 +169,13 @@ export default {
       edited: false,
       index: 0,
       projectName: "",
-      user: null,
+      user: null
     };
   },
 
   mounted() {
     var model = this.$store.state.model.layers;
+    this.user = this.$store.state.user;
     if (model) {
       this.layer_state = model;
     }
@@ -183,10 +184,7 @@ export default {
   components: {
     Card,
     draggable,
-    SignInButton,
-  },
-  mounted() {
-    this.user = this.$store.state.user;
+    SignInButton
   },
   methods: {
     layerToPython(object) {
@@ -205,7 +203,7 @@ export default {
       this.dialog = false;
       this.response = {
         name: this.layerName,
-        hyperparameter: this.response_hyperparameter,
+        hyperparameter: this.response_hyperparameter
       };
 
       if (!this.edited) {
@@ -227,7 +225,7 @@ export default {
           .firestore()
           .collection("users")
           .doc(this.$store.state.user.uid);
-        userref.get().then((doc) => {
+        userref.get().then(doc => {
           if (!doc.exists) {
             userref.set({ models: [uid], ...this.$store.state.user });
           }
@@ -237,7 +235,7 @@ export default {
           .collection("users")
           .doc(this.$store.state.user.uid)
           .update({
-            models: firebase.firestore.FieldValue.arrayUnion(uid),
+            models: firebase.firestore.FieldValue.arrayUnion(uid)
           });
         firebase
           .firestore()
@@ -273,8 +271,8 @@ export default {
 
     copyToClipBoard() {
       console.log("copied");
-    },
-  },
+    }
+  }
 };
 </script>
 
