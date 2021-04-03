@@ -39,6 +39,7 @@
                 <v-col>
                   <v-text-field
                     label="value"
+                    :type="hyperparameter.form.type"
                     v-model="response_hyperparameter[hyperparameter.name]"
                     counter="50"
                     filled
@@ -102,11 +103,11 @@ export default {
     },
 
     addLayer() {
+      this.dialog = false;
       this.response = {
         name: this.layerName,
         hyperparameter: this.response_hyperparameter
       };
-      console.log(this.response_hyperparameter);
       this.layer_state.push(this.response);
     },
 
