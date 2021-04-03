@@ -47,7 +47,7 @@
           </v-col>
           <v-col>
             <v-btn
-              v-if="layer_state.length > 0 && this.$store.state.user !== null"
+              v-if="this.$store.state.user !== null"
               color="#ff9000"
               @click="saveModel"
             >
@@ -55,11 +55,7 @@
             </v-btn>
           </v-col>
           <v-col>
-            <v-btn
-              v-if="layer_state.length > 0"
-              color="#ff9000"
-              @click="saveModel"
-            >
+            <v-btn color="#ff9000" @click="saveModel">
               <v-text class="savemodel">Discard Model</v-text>
             </v-btn>
           </v-col>
