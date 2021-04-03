@@ -119,15 +119,14 @@
               v-for="(layer, index) in layer_state"
               :key="index"
             >
-              <pre>
-              <code v-highlight="code" class="python">{{ layerToPython(layer) }}</code>
-            </pre>
+              <code v-highlight="code" class="python">{{
+                layerToPython(layer),
+              }}</code>
             </li>
           </ul>
         </v-container>
       </v-col>
     </v-row>
-    <v-row> </v-row>
   </v-container>
 </template>
 
