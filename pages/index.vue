@@ -11,15 +11,22 @@
           <v-col cols="12">
             <h2>Layers:</h2>
 
-            <v-item v-for="(layer, index) in layer_state" :key="index">
-              <v-row no-gutters>
-                <Card
-                  v-bind:layerData="layer"
-                  v-bind:method="removeLayer"
-                  v-bind:index="index"
-                />
-              </v-row>
-            </v-item>
+            <draggable
+              v-model="layer_state"
+              group="people"
+              @start="drag = true"
+              @end="drag = false"
+            >
+              <v-item v-for="(layer, index) in layer_state" :key="index">
+                <v-row no-gutters>
+                  <Card
+                    v-bind:layerData="layer"
+                    v-bind:method="removeLayer"
+                    v-bind:index="index"
+                  />
+                </v-row>
+              </v-item>
+            </draggable>
           </v-col>
         </v-row>
 
@@ -103,6 +110,7 @@
 import Card from "@/components/Card";
 import SignInButton from "@/components/SignInButton";
 import layers from "@/tensorflow_data/tensorflow_data";
+import draggable from "vuedraggable";
 
 export default {
   data() {
@@ -119,6 +127,7 @@ export default {
 
   components: {
     Card,
+    draggable,
     SignInButton
   },
   methods: {
