@@ -1,13 +1,15 @@
 const initializers = [
-  "glorot_uniform",
-  "glorot_normal",
-  "he_normal",
-  "he_uniform",
-  "lecun_normal",
-  "lecun_uniform",
-  "ones",
-  "zeros"
+  "'glorot_uniform'",
+  "'glorot_normal'",
+  "'he_normal'",
+  "'he_uniform'",
+  "'lecun_normal'",
+  "'lecun_uniform'",
+  "'ones'",
+  "'zeros'"
 ];
+const regularizers = ["'l1'", "'l2'"]
+const activations = ["'relu'", "'selu'", "'elu'", "'gelu'", "'exponential'", "'linear'", "'tanh'", "'softmax'", "'softplus'"]
 const bool = ["True", "False"];
 
 const layers = {
