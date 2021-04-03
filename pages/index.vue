@@ -176,13 +176,8 @@ export default {
     saveModel() {
       if (this.layer_state && this.$store.state.user) {
         var uid = uuidv4();
-        // firebase
-        //   .firestore()
-        //   .collection("users")
-        //   .doc(this.$store.state.user.uid).get().then(doc=>{
-        //     if(!)
-        //   })
-        // var model2 = [];
+        var model_name = this.projectName;
+        console.log(model_name);
         const userref = firebase
           .firestore()
           .collection("users")
@@ -192,11 +187,6 @@ export default {
             userref.set({ models: [uid], ...this.$store.state.user });
           }
         });
-        // firebase
-        //   .firestore()
-        //   .collection("users")
-        //   .doc(this.$store.state.user.uid)
-        //   .get();
         firebase
           .firestore()
           .collection("users")
@@ -207,7 +197,7 @@ export default {
         firebase
           .firestore()
           .collection("models")
-          .add({ uid, ...this.layer_state });
+          .add({ uid, model_name, ...this.layer_state });
       }
     },
 
