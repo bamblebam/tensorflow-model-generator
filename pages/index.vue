@@ -4,7 +4,7 @@
       <v-col cols="6">
         <v-row>
           <v-col cols="12">
-            <v-item v-for="(layer, index) in layer_state" :key="index">
+            <v-item v-for="(layer, index) in layersTemplate" :key="index">
               <v-row>
                 <Card v-bind:layerData="layer" />
               </v-row>
@@ -19,25 +19,23 @@
       </v-col>
       <v-col cols="6">Code here</v-col>
     </v-row>
+    <v-btn @click="test">Click</v-btn>
   </v-container>
 </template>
 
 <script>
-import Logo from "~/components/Logo.vue";
-import VuetifyLogo from "~/components/VuetifyLogo.vue";
 import Card from "@/components/Card";
-import layers from "~/tensorflow_data/tensorflow_data.js";
+import layers from "@/tensorflow_data/tensorflow_data";
 
 export default {
   data() {
     return {
       layer_state: [],
+      layersTemplate: layers
     };
   },
   components: {
-    Logo,
-    VuetifyLogo,
-    Card,
+    Card
   },
   methods: {
     layerToPython(object) {
@@ -49,6 +47,9 @@ export default {
       line += ")";
       return line;
     },
-  },
+    test() {
+      console.log(this.layersTemplate);
+    }
+  }
 };
 </script>
