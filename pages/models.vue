@@ -1,7 +1,8 @@
 <template>
   <v-container>
     <h1>My models:</h1>
-    <v-btn @click="load">Load </v-btn>
+
+    <h2 v-if="models.length === 0">This may take upto few minutes...</h2>
     <v-row v-for="(model, index) in models" :key="index">
       <v-col cols="12">
         <v-card>
@@ -28,6 +29,9 @@ export default {
     return {
       models: []
     };
+  },
+  mounted() {
+    this.load();
   },
 
   methods: {
@@ -63,6 +67,7 @@ export default {
       const model = this.models[index];
       console.log(model);
       this.$store.commit("addModel", model);
+      this.$router.push("/");
     }
   }
 
