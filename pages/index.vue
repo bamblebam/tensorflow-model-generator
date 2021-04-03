@@ -9,6 +9,7 @@
       <v-col cols="6">
         <v-row>
           <v-col cols="12">
+            <h2>Layers:</h2>
             <v-item v-for="(layer, index) in layer_state" :key="index">
               <v-row no-gutters>
                 <Card
@@ -27,10 +28,15 @@
 
         <v-dialog v-model="dialog" max-width="700">
           <v-card>
-            <v-card-title class="headline"> Layer name </v-card-title>
+            <v-card-title class="headline"> Layer </v-card-title>
 
             <v-card-text>
-              <v-combobox v-model="layerName" :items="layerNames"> </v-combobox>
+              <v-combobox
+                placeholder="Layer Name"
+                v-model="layerName"
+                :items="layerNames"
+              >
+              </v-combobox>
             </v-card-text>
             <v-card-text>
               <v-row
@@ -130,7 +136,7 @@ export default {
       this.layer_state.push(this.response);
       this.response = {};
       this.response_hyperparameter = {};
-      this.code = layerToPython(this.response);
+      //this.code = layerToPython(this.response);
     },
 
     removeLayer(index) {
