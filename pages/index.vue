@@ -130,6 +130,7 @@ import layers from "@/tensorflow_data/tensorflow_data";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import draggable from "vuedraggable";
+import { v4 as uuidv4 } from "uuid";
 
 export default {
   data() {
@@ -174,10 +175,11 @@ export default {
 
     saveModel() {
       if (this.layer_state) {
+        uid = uuidv4();
         firebase
           .firestore()
           .collection("models")
-          .add({ ...this.layer_state });
+          .add({ uid, ...this.layer_state });
       }
     },
 
