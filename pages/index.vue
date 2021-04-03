@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="12">
+      <v-col cols="12" align="end">
         <SignInButton />
       </v-col>
     </v-row>
@@ -10,6 +10,7 @@
         <v-row>
           <v-col cols="12">
             <h2>Layers:</h2>
+
             <v-item v-for="(layer, index) in layer_state" :key="index">
               <v-row no-gutters>
                 <Card
@@ -22,11 +23,11 @@
           </v-col>
         </v-row>
 
-        <v-btn color="#ff7000 " @click="dialog = true">
+        <v-btn color="#ff7000" @click="dialog = true">
           <v-icon color="white">mdi-plus-thick</v-icon>
         </v-btn>
 
-        <v-dialog v-model="dialog" max-width="700">
+        <v-dialog overlay-color="#ff7000 " v-model="dialog" max-width="700">
           <v-card>
             <v-card-title class="headline"> Layer </v-card-title>
 
