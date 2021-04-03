@@ -39,14 +39,23 @@
         <v-row>
           <v-col>
             <v-btn class="mx-2" fab dark color="#ff7000" @click="dialog = true">
-              <v-icon dark>
-                mdi-plus
-              </v-icon>
+              <v-icon dark> mdi-plus </v-icon>
             </v-btn>
           </v-col>
           <v-col>
-            <v-btn color="#ff9000" @click="saveModel">
-              <v-card-text class="savemodel">Save Model</v-card-text>
+            <v-btn
+              v-if="layer_state.length > 0 && this.$store.state.user !== null"
+              color="#ff9000"
+              @click="saveModel"
+            >
+              <v-text class="savemodel">Save Model</v-text>
+            </v-btn>
+            <v-btn
+              v-if="layer_state.length > 0"
+              color="#ff9000"
+              @click="saveModel"
+            >
+              <v-text class="savemodel">Discard Model</v-text>
             </v-btn>
           </v-col>
         </v-row>
@@ -159,7 +168,8 @@ export default {
       response: {},
       edited: false,
       index: 0,
-      project_name: ""
+      projectName: "",
+      user: null,
     };
   },
 
@@ -173,7 +183,10 @@ export default {
   components: {
     Card,
     draggable,
-    SignInButton
+    SignInButton,
+  },
+  mounted() {
+    this.user = this.$store.state.user;
   },
   methods: {
     layerToPython(object) {
@@ -192,7 +205,7 @@ export default {
       this.dialog = false;
       this.response = {
         name: this.layerName,
-        hyperparameter: this.response_hyperparameter
+        hyperparameter: this.response_hyperparameter,
       };
 
       if (!this.edited) {
@@ -214,7 +227,7 @@ export default {
           .firestore()
           .collection("users")
           .doc(this.$store.state.user.uid);
-        userref.get().then(doc => {
+        userref.get().then((doc) => {
           if (!doc.exists) {
             userref.set({ models: [uid], ...this.$store.state.user });
           }
@@ -224,12 +237,13 @@ export default {
           .collection("users")
           .doc(this.$store.state.user.uid)
           .update({
-            models: firebase.firestore.FieldValue.arrayUnion(uid)
+            models: firebase.firestore.FieldValue.arrayUnion(uid),
           });
         firebase
           .firestore()
           .collection("models")
-          .add({ uid, model_name, ...this.layer_state });
+          .doc(uid)
+          .set({ model_name, layers: this.layer_state });
       }
       this.response_hyperparameter = {};
       this.response = {};
@@ -238,6 +252,12 @@ export default {
 
     removeLayer(index) {
       this.$delete(this.layer_state, index);
+    },
+
+    discardModel() {
+      this.response_hyperparameter = {};
+      this.response = {};
+      this.layer_state = [];
     },
 
     editLayer(index) {
@@ -250,16 +270,11 @@ export default {
       this.dialog = true;
       this.edited = true;
     },
-    discardModel() {
-      this.response_hyperparameter = {};
-      this.response = {};
-      this.layer_state = [];
-    },
 
     copyToClipBoard() {
       console.log("copied");
-    }
-  }
+    },
+  },
 };
 </script>
 

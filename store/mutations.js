@@ -1,8 +1,11 @@
 export default {
-  addUser(state, user) {
-    state.user = user;
-  },
-  addModel(state, model) {
-    state.model = model;
-  }
+    addUser(state, user) {
+        state.user = user
+    },
+    logoutUser(state) {
+        state.user = null
+    },
+    addModel(state, model) {
+        state.model = model;
+    }
 };
