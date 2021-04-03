@@ -17,8 +17,7 @@ export default {
         .auth()
         .signInWithPopup(provider)
         .then((res) => {
-          this.$store.commit("addUser", res.user);
-          console.log(this.$store.state.user);
+          console.log(res.user);
         })
         .catch((error) => {
           console.log(error);
