@@ -4,7 +4,7 @@
       <v-col cols="6">
         <v-row>
           <v-col cols="12">
-            <v-item v-for="(layer, index) in layer_state" :key="index">
+            <v-item v-for="(layer, index) in layersTemplate" :key="index">
               <v-row>
                 <Card
                   v-bind:layerData="layer"
