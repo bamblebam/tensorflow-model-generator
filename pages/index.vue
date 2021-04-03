@@ -1,6 +1,11 @@
 <template>
   <v-container>
     <v-row>
+      <v-col cols="12">
+        <SignInButton />
+      </v-col>
+    </v-row>
+    <v-row>
       <v-col cols="6">
         <v-row>
           <v-col cols="12">
@@ -99,7 +104,7 @@ export default {
 
   components: {
     Card,
-    SignInButton,
+    SignInButton
   },
   methods: {
     layerToPython(object) {
@@ -120,7 +125,7 @@ export default {
       this.dialog = false;
       this.response = {
         name: this.layerName,
-        hyperparameter: this.response_hyperparameter,
+        hyperparameter: this.response_hyperparameter
       };
       this.layer_state.push(this.response);
       this.response = {};
@@ -130,7 +135,7 @@ export default {
 
     removeLayer(index) {
       this.$delete(this.layer_state, index);
-    },
-  },
+    }
+  }
 };
 </script>
