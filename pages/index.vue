@@ -241,7 +241,7 @@ export default {
           .firestore()
           .collection("models")
           .doc(uid)
-          .set({ model_name, layers: this.layer_state });
+          .set({ uid, model_name, layers: this.layer_state });
       }
       this.response_hyperparameter = {};
       this.response = {};
