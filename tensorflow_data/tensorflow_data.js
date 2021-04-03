@@ -44,5 +44,55 @@ const layers = {
                 value: 'zeros'
             }
         }
+    },
+    Conv2D: {
+        name: 'Conv2D',
+        hyperparameters: {
+            filters: {
+                name: 'filters',
+                form: {
+                    type: 'int'
+                },
+                value: 32
+            },
+            kernel_size: {
+                name: 'kernel_size',
+                form: {
+                    type: 'int'
+                },
+                value: 2
+            },
+            padding: {
+                name: 'padding',
+                form: {
+                    type: 'dropdown',
+                    options: ['same', 'valid']
+                },
+                value: 'valid'
+            },
+            activation: {
+                name: 'activation',
+                form: {
+                    type: 'string'
+                },
+                value: 'None'
+            },
+            kernel_initializer: {
+                name: 'kernel_initializer',
+                form: {
+                    type: 'dropdown',
+                    options: initializers
+                },
+                value: 'glorot_uniform'
+            },
+            bias_initializers: {
+                name: 'bias_initializer',
+                form: {
+                    type: 'dropdown',
+                    options: initializers
+                },
+                value: 'zeros'
+            }
+        }
     }
 }
