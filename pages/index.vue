@@ -143,6 +143,7 @@ import layers from "@/tensorflow_data/tensorflow_data";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import draggable from "vuedraggable";
+import { v4 as uuidv4 } from "uuid";
 
 export default {
   data() {
@@ -203,12 +204,34 @@ export default {
     },
 
     saveModel() {
-      if (this.layer_state) {
+      if (this.layer_state && this.$store.state.user) {
+        var uid = uuidv4();
+        var model_name = this.projectName;
+        console.log(model_name);
+        const userref = firebase
+          .firestore()
+          .collection("users")
+          .doc(this.$store.state.user.uid);
+        userref.get().then(doc => {
+          if (!doc.exists) {
+            userref.set({ models: [uid], ...this.$store.state.user });
+          }
+        });
+        firebase
+          .firestore()
+          .collection("users")
+          .doc(this.$store.state.user.uid)
+          .update({
+            models: firebase.firestore.FieldValue.arrayUnion(uid)
+          });
         firebase
           .firestore()
           .collection("models")
-          .add({ ...this.layer_state });
+          .add({ uid, model_name, ...this.layer_state });
       }
+      this.response_hyperparameter = {};
+      this.response = {};
+      this.layer_state = [];
     },
 
     removeLayer(index) {
@@ -224,6 +247,11 @@ export default {
       this.layerName = this.layer_state[index].name;
       this.dialog = true;
       this.edited = true;
+    },
+    discardModel() {
+      this.response_hyperparameter = {};
+      this.response = {};
+      this.layer_state = [];
     },
 
     copyToClipBoard() {
