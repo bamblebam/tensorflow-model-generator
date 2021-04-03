@@ -39,12 +39,15 @@
           <v-icon color="white">mdi-plus-thick</v-icon>
         </v-btn>
 
-        <v-dialog overlay-color="#ff7000 " v-model="dialog" max-width="700">
+        <v-dialog v-model="dialog" max-width="700">
           <v-card>
-            <v-card-title class="headline"> Layer </v-card-title>
+            <v-card-title class="text">
+              Layer
+            </v-card-title>
 
             <v-card-text>
               <v-combobox
+                class="text"
                 placeholder="Layer Name"
                 v-model="layerName"
                 :items="layerNames"
@@ -58,18 +61,20 @@
                 :key="hyperparameter.name"
               >
                 <v-col>
-                  <v-card-text>
+                  <v-card-text class="text">
                     {{ hyperparameter.name }}
                   </v-card-text>
                 </v-col>
                 <v-col>
                   <v-select
+                    class="text"
                     v-if="hyperparameter.form.type === 'dropdown'"
                     v-model="response_hyperparameter[hyperparameter.name]"
                     :items="hyperparameter.form.options"
                     :value="hyperparameter.value"
                   ></v-select>
                   <v-text-field
+                    class="text"
                     v-else
                     label="value"
                     :type="hyperparameter.form.type"
@@ -188,5 +193,9 @@ export default {
 <style scoped>
 .list-group {
   list-style: none;
+}
+
+.text {
+  color: #ff7000;
 }
 </style>
