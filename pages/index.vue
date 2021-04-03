@@ -65,7 +65,7 @@
                 <v-col>
                   <v-select
                     v-if="hyperparameter.form.type === 'dropdown'"
-                    :v-model="response_hyperparameter[hyperparameter.name]"
+                    v-model="response_hyperparameter[hyperparameter.name]"
                     :items="hyperparameter.form.options"
                     :value="hyperparameter.value"
                   ></v-select>
@@ -73,7 +73,7 @@
                     v-else
                     label="value"
                     :type="hyperparameter.form.type"
-                    :v-model="response_hyperparameter[hyperparameter.name]"
+                    v-model="response_hyperparameter[hyperparameter.name]"
                     :value="hyperparameter.value"
                     counter="50"
                     filled
