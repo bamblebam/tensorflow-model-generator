@@ -55,8 +55,8 @@
             </v-btn>
           </v-col>
           <v-col>
-            <v-btn color="#ff9000" @click="saveModel">
-              <v-text class="discardModel">Discard Model</v-text>
+            <v-btn color="#ff9000" @click="discardModel">
+              <v-text class="savemodel">Discard Model</v-text>
             </v-btn>
           </v-col>
         </v-row>
