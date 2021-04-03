@@ -23,6 +23,6 @@ Todo:
 
 - [ ] global user
 - [ ] syntax highlighter
-- [ ] frontend
-- [ ] edit layer
+- [x] frontend
+- [x] edit layer
 - [ ]
