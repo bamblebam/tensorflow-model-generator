@@ -12,14 +12,13 @@
 export default {
   methods: {
     signInPopup: async function () {
-      var user = null;
       var provider = new this.$firebase.auth.GoogleAuthProvider();
       this.$firebase
         .auth()
         .signInWithPopup(provider)
         .then((res) => {
-          user = res.user;
-          console.log(user);
+          this.$store.commit("addUser", res.user);
+          console.log(this.$store.state.user);
         })
         .catch((error) => {
           console.log(error);
