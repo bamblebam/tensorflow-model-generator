@@ -5,7 +5,7 @@
         <v-row>
           <v-col cols="12">
             <v-item v-for="(layer, index) in layer_state" :key="index">
-              <v-row>
+              <v-row no-gutters>
                 <Card
                   v-bind:layerData="layer"
                   v-bind:method="removeLayer"
@@ -15,10 +15,12 @@
             </v-item>
           </v-col>
         </v-row>
-        <v-btn @click="dialog = true">
-          <v-icon>mdi-plus-thick</v-icon>
+
+        <v-btn color="#ff7000 " @click="dialog = true">
+          <v-icon color="white">mdi-plus-thick</v-icon>
         </v-btn>
-        <v-dialog v-model="dialog" max-width="320">
+
+        <v-dialog v-model="dialog" max-width="700">
           <v-card>
             <v-card-title class="headline"> Layer name </v-card-title>
 
@@ -67,9 +69,12 @@
           </v-card>
         </v-dialog>
       </v-col>
-      <v-col cols="6">Code here</v-col>
+      <v-col cols="6">
+        <v-container>
+          {{ this.code }}
+        </v-container>
+      </v-col>
     </v-row>
-    <v-btn @click="addLayer">Click</v-btn>
   </v-container>
 </template>
 
@@ -86,7 +91,8 @@ export default {
       layerName: "Dense",
       layerNames: Object.keys(layers),
       response_hyperparameter: {},
-      response: {}
+      response: {},
+      code: ""
     };
   },
 
@@ -115,6 +121,9 @@ export default {
         hyperparameter: this.response_hyperparameter
       };
       this.layer_state.push(this.response);
+      this.response = {};
+      this.response_hyperparameter = {};
+      this.code = layerToPython(this.response);
     },
 
     removeLayer(index) {

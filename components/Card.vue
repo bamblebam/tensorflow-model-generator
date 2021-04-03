@@ -1,27 +1,23 @@
 <template>
   <v-container>
-    <v-card class="mx-auto my-12" max-width="700">
+    <v-card class="mx-auto" max-width="700" id="card">
       <v-card-title>
         <v-row>
           <v-col cols="10">Layer : {{ this.layerData.name }}</v-col>
           <v-col cols="2" align-self="end"
-            ><v-icon @click="method(index)">mdi-delete</v-icon></v-col
+            ><v-icon @click="method(index)" color="white"
+              >mdi-delete</v-icon
+            ></v-col
           >
         </v-row>
       </v-card-title>
-      <v-card-text>
-        <v-row>
-          <v-item
-            v-for="[key, value] in Object.entries(
-              this.layerData.hyperparameter
-            )"
-            :key="key"
-          >
-            <v-container>
-              <p>{{ key }} : {{ value }}</p>
-            </v-container>
-          </v-item>
-        </v-row>
+      <v-card-text id="text">
+        <v-item
+          v-for="[key, value] in Object.entries(this.layerData.hyperparameter)"
+          :key="key"
+        >
+          {{ key }} : {{ value }}</v-item
+        >
       </v-card-text>
     </v-card>
   </v-container>
@@ -38,4 +34,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+#card {
+  background: linear-gradient(to right, #ff7000 0%, #ff9000 100%);
+  color: white;
+}
+#text {
+  color: white;
+}
+</style>
