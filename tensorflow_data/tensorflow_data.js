@@ -26,7 +26,8 @@ const layers = {
       activation: {
         name: "activation",
         form: {
-          type: "string"
+          type: "dropdown",
+          options: activations
         },
         value: "None"
       },
@@ -53,9 +54,26 @@ const layers = {
           options: initializers
         },
         value: "zeros"
+      },
+      kernel_regularizer: {
+        name: "kernel_regularizer",
+        form: {
+          type: "dropdown",
+          options: regularizers
+        },
+        value: "None"
+      },
+      bias_regularizer: {
+        name: "bias_regularizer",
+        form: {
+          type: "dropdown",
+          options: regularizers
+        },
+        value: "None"
       }
     }
   },
+
   Conv2D: {
     name: "Conv2D",
     hyperparameters: {
@@ -84,9 +102,9 @@ const layers = {
       activation: {
         name: "activation",
         form: {
-          type: "string"
+          type: "dropdown"
         },
-        value: "None"
+        value: activations
       },
       kernel_initializer: {
         name: "kernel_initializer",
@@ -103,6 +121,22 @@ const layers = {
           options: initializers
         },
         value: "zeros"
+      },
+      kernel_regularizers: {
+        name: "kernel_regularizers",
+        form: {
+          type: "dropdown",
+          options: regularizers
+        },
+        value: "None"
+      },
+      bias_regularizerss: {
+        name: "bias_regularizers",
+        form: {
+          type: "dropdown",
+          options: regularizers
+        },
+        value: "None"
       }
     }
   }
