@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="12">
+      <v-col cols="12" align="end">
         <SignInButton />
       </v-col>
     </v-row>
@@ -9,30 +9,45 @@
       <v-col cols="6">
         <v-row>
           <v-col cols="12">
-            <v-item v-for="(layer, index) in layer_state" :key="index">
-              <v-row no-gutters>
-                <Card
-                  v-bind:layerData="layer"
-                  v-bind:method="removeLayer"
-                  v-bind:index="index"
-                />
-              </v-row>
-            </v-item>
+            <h2>Layers:</h2>
+
+            <draggable
+              v-model="layer_state"
+              group="people"
+              @start="drag = true"
+              @end="drag = false"
+            >
+              <v-item v-for="(layer, index) in layer_state" :key="index">
+                <v-row no-gutters>
+                  <Card
+                    v-bind:layerData="layer"
+                    v-bind:method="removeLayer"
+                    v-bind:index="index"
+                  />
+                </v-row>
+              </v-item>
+            </draggable>
           </v-col>
         </v-row>
 
-        <v-btn color="#ff7000 " @click="dialog = true">
+        <v-btn color="#ff7000" @click="dialog = true">
           <v-icon color="white">mdi-plus-thick</v-icon>
         </v-btn>
         <v-btn color="#ff7000 " @click="saveModel">
           <v-icon color="black">mdi-plus-thick</v-icon>
         </v-btn>
-        <v-dialog v-model="dialog" max-width="700">
+
+        <v-dialog overlay-color="#ff7000 " v-model="dialog" max-width="700">
           <v-card>
-            <v-card-title class="headline"> Layer name </v-card-title>
+            <v-card-title class="headline"> Layer </v-card-title>
 
             <v-card-text>
-              <v-combobox v-model="layerName" :items="layerNames"> </v-combobox>
+              <v-combobox
+                placeholder="Layer Name"
+                v-model="layerName"
+                :items="layerNames"
+              >
+              </v-combobox>
             </v-card-text>
             <v-card-text>
               <v-row
@@ -78,14 +93,14 @@
       </v-col>
       <v-col cols="6">
         <v-container>
-          <h1>bam</h1>
+          <h1>Code:</h1>
           <ul class="list-group">
             <li
               class="list-group-item"
               v-for="(layer, index) in layer_state"
               :key="index"
             >
-              {{ layerToPython(layer) }}
+              {{ layerToPython(layer) }},
             </li>
           </ul>
         </v-container>
@@ -100,6 +115,7 @@ import SignInButton from "@/components/SignInButton";
 import layers from "@/tensorflow_data/tensorflow_data";
 import * as firebase from "firebase/app";
 import "firebase/firestore";
+import draggable from "vuedraggable";
 
 export default {
   data() {
@@ -116,6 +132,7 @@ export default {
 
   components: {
     Card,
+    draggable,
     SignInButton,
   },
   methods: {
@@ -160,3 +177,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.list-group {
+  list-style: none;
+}
+</style>
