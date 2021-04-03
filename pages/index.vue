@@ -4,7 +4,7 @@
       <v-col cols="6">
         <v-row>
           <v-col cols="12">
-            <v-item v-for="(layer, index) in layersTemplate" :key="index">
+            <v-item v-for="(layer, index) in layer_state" :key="index">
               <v-row>
                 <Card v-bind:layerData="layer" />
               </v-row>
@@ -20,7 +20,7 @@
       </v-col>
       <v-col cols="6">Code here</v-col>
     </v-row>
-    <v-btn @click="test">Click</v-btn>
+    <v-btn @click="addLayer">Click</v-btn>
   </v-container>
 </template>
 
@@ -50,6 +50,12 @@ export default {
     },
     test() {
       console.log(this.layersTemplate);
+    },
+    addLayer() {
+      const object = {
+        name: "jugik",
+      };
+      this.layer_state.push(object);
     },
   },
 };
