@@ -191,14 +191,15 @@ export default {
         this.layer_state[this.index] = this.response;
         this.edited = false;
       }
+
+      if (!this.edited) {
+        this.layer_state.push(this.response);
+      } else {
+        this.layer_state.splice(this.index, 0, this.response);
+        this.edited = false;
+      }
       this.response = {};
       this.response_hyperparameter = {};
-      this.layer_state.push(this.response);
-      // if (!this.edited) {
-      // } else {
-      //   this.layer_state.splice(this.index, 0, this.response);
-      //   this.edited = false;
-      // }
     },
 
     saveModel() {
