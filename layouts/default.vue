@@ -1,117 +1,85 @@
 <template>
-  <v-app dark>
-    <v-navigation-drawer
-      v-model="drawer"
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      fixed
-      app
-    >
-      <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        >
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-app-bar
-      :clipped-left="clipped"
-      fixed
-      app
-    >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-btn
-        icon
-        @click.stop="miniVariant = !miniVariant"
-      >
-        <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click.stop="clipped = !clipped"
-      >
-        <v-icon>mdi-application</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click.stop="fixed = !fixed"
-      >
-        <v-icon>mdi-minus</v-icon>
-      </v-btn>
-      <v-toolbar-title v-text="title" />
-      <v-spacer />
-      <v-btn
-        icon
-        @click.stop="rightDrawer = !rightDrawer"
-      >
-        <v-icon>mdi-menu</v-icon>
-      </v-btn>
-    </v-app-bar>
-    <v-main>
-      <v-container>
-        <nuxt />
-      </v-container>
-    </v-main>
-    <v-navigation-drawer
-      v-model="rightDrawer"
-      :right="right"
-      temporary
-      fixed
-    >
-      <v-list>
-        <v-list-item @click.native="right = !right">
-          <v-list-item-action>
-            <v-icon light>
-              mdi-repeat
-            </v-icon>
-          </v-list-item-action>
-          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-footer
-      :absolute="!fixed"
-      app
-    >
-      <span>&copy; {{ new Date().getFullYear() }}</span>
-    </v-footer>
+  <v-app>
+    <v-row>
+      <v-col cols="2">
+        <v-navigation-drawer permanent expand-on-hover>
+          <v-list>
+            <v-list-item class="px-2">
+              <v-list-item-avatar>
+                <v-img
+                  src="https://randomuser.me/api/portraits/men/37.jpg"
+                ></v-img>
+              </v-list-item-avatar>
+            </v-list-item>
+
+            <v-list-item link v-if="this.$store.state.user !== null">
+              <v-list-item-content>
+                <v-list-item-title class="title">{{
+                  this.$store.state.user.username
+                }}</v-list-item-title>
+                <v-list-item-subtitle>{{
+                  this.$store.state.user.email
+                }}</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+
+          <v-divider></v-divider>
+
+          <v-list nav dense>
+            <v-list-item to="/">
+              <v-list-item-icon>
+                <v-icon>mdi-home</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>Home</v-list-item-title>
+            </v-list-item>
+            <v-list-item v-if="this.$store.state.user !== null" to="/models">
+              <v-list-item-icon>
+                <v-icon>mdi-book</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>My models</v-list-item-title>
+            </v-list-item>
+            <v-list-item
+              v-if="this.$store.state.user !== null"
+              @click="signout"
+            >
+              <v-list-item-icon>
+                <v-icon>mdi-exit-to-app</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title v-if="this.$store.state.user !== null"
+                >Logout</v-list-item-title
+              >
+            </v-list-item>
+          </v-list>
+        </v-navigation-drawer>
+      </v-col>
+      <v-col cols="10">
+        <v-main>
+          <v-container>
+            <v-slide-x-transition>
+              <nuxt />
+            </v-slide-x-transition>
+          </v-container>
+        </v-main>
+      </v-col>
+    </v-row>
   </v-app>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-      clipped: false,
-      drawer: false,
-      fixed: false,
-      items: [
-        {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/'
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
-        }
-      ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'Vuetify.js'
-    }
-  }
-}
+      user: null,
+    };
+  },
+  mounted() {
+    this.user = this.$store.state.user;
+  },
+  methods: {
+    signout() {
+      this.$store.commit("logoutUser");
+    },
+  },
+};
 </script>
