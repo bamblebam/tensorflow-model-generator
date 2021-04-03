@@ -1,5 +1,5 @@
 <template>
-  <v-btn @click="signInPopup" color="#ff7000">
+  <v-btn class="mx-2" fab dark @click="signInPopup" color="#ff7000">
     <v-icon color="white"> mdi-account-plus</v-icon>
   </v-btn>
 </template>
