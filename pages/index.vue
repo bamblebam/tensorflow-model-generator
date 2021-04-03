@@ -151,7 +151,7 @@ export default {
   data() {
     return {
       dialog: false,
-      layer_state: this.$store.state.model || [],
+      layer_state: this.$store.state.model.layers || [],
       layersTemplate: layers,
       layerName: "Dense",
       layerNames: Object.keys(layers),
