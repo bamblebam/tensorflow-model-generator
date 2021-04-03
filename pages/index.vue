@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import Card from "@/components/Card";
+import Card from "~/components/Card";
 import layers from "~/tensorflow_data/tensorflow_data.js";
 
 export default {
