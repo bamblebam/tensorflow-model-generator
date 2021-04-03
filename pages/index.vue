@@ -41,9 +41,7 @@
 
         <v-dialog v-model="dialog" max-width="700">
           <v-card>
-            <v-card-title class="text">
-              Layer
-            </v-card-title>
+            <v-card-title class="text"> Layer </v-card-title>
 
             <v-card-text>
               <v-combobox
@@ -109,7 +107,9 @@
               v-for="(layer, index) in layer_state"
               :key="index"
             >
-              {{ layerToPython(layer) }},
+              <pre>
+              <code v-highlight="code" class="python">{{ layerToPython(layer) }}</code>
+            </pre>
             </li>
           </ul>
         </v-container>
@@ -117,9 +117,7 @@
     </v-row>
     <v-row>
       <v-col cols="12" align="end">
-        <v-btn @click="saveModel">
-          Save Model
-        </v-btn>
+        <v-btn @click="saveModel"> Save Model </v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -142,14 +140,14 @@ export default {
       layerName: "Dense",
       layerNames: Object.keys(layers),
       response_hyperparameter: {},
-      response: {}
+      response: {},
     };
   },
 
   components: {
     Card,
     draggable,
-    SignInButton
+    SignInButton,
   },
   methods: {
     layerToPython(object) {
@@ -167,7 +165,7 @@ export default {
       this.dialog = false;
       this.response = {
         name: this.layerName,
-        hyperparameter: this.response_hyperparameter
+        hyperparameter: this.response_hyperparameter,
       };
       this.layer_state.push(this.response);
       this.response = {};
@@ -185,8 +183,8 @@ export default {
 
     removeLayer(index) {
       this.$delete(this.layer_state, index);
-    }
-  }
+    },
+  },
 };
 </script>
 
