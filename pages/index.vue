@@ -271,8 +271,18 @@ export default {
 
     copyToClipBoard() {
       try {
-        this.$copyText(this.$refs.copy_code.innerText);
-        console.log(this.$refs.copy_code.innerText);
+        this.$copyText(
+          this.$refs.copy_code.innerText.substring(
+            5,
+            this.$refs.copy_code.innerText.length
+          )
+        );
+        console.log(
+          this.$refs.copy_code.innerText.substring(
+            5,
+            this.$refs.copy_code.innerText.length
+          )
+        );
       } catch (error) {
         console.log(error);
       }
