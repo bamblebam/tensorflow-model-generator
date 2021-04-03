@@ -151,7 +151,7 @@ export default {
   data() {
     return {
       dialog: false,
-      layer_state: this.$store.state.model.layers || [],
+      layer_state: [],
       layersTemplate: layers,
       layerName: "Dense",
       layerNames: Object.keys(layers),
@@ -164,8 +164,10 @@ export default {
   },
 
   mounted() {
-    var model = this.$store.state.model;
-    console.log(model);
+    var model = this.$store.state.model.layers;
+    if (model) {
+      this.layer_state = model;
+    }
   },
 
   components: {
