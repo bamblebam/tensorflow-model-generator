@@ -4,9 +4,13 @@
       <v-col cols="6">
         <v-row>
           <v-col cols="12">
-            <v-item v-for="(layer, index) in layer" :key="index">
+            <v-item v-for="(layer, index) in layer_state" :key="index">
               <v-row>
-                <Card v-bind:layerData="layer" />
+                <Card
+                  v-bind:layerData="layer"
+                  v-bind:method="removeLayer"
+                  v-bind:index="index"
+                />
               </v-row>
             </v-item>
           </v-col>
@@ -16,9 +20,7 @@
         </v-btn>
         <v-dialog v-model="dialog" max-width="320">
           <v-card>
-            <v-card-title class="headline">
-              Layer name
-            </v-card-title>
+            <v-card-title class="headline"> Layer name </v-card-title>
 
             <v-card-text>
               <v-combobox v-model="layerName" :items="layerNames"> </v-combobox>
@@ -60,6 +62,7 @@
       </v-col>
       <v-col cols="6">Code here</v-col>
     </v-row>
+    <v-btn @click="addLayer">Click</v-btn>
   </v-container>
 </template>
 
@@ -92,8 +95,19 @@ export default {
       return line;
     },
 
-    add() {
-      console.log(this.value);
+    test() {
+      console.log(this.layersTemplate);
+    },
+
+    addLayer() {
+      const object = {
+        name: "jugik"
+      };
+      this.layer_state.push(object);
+    },
+
+    removeLayer(index) {
+      this.$delete(this.layer_state, index);
     }
   }
 };
