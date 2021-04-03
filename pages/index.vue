@@ -80,6 +80,7 @@
 
 <script>
 import Card from "@/components/Card";
+import SignInButton from "@/components/SignInButton";
 import layers from "@/tensorflow_data/tensorflow_data";
 
 export default {
@@ -97,7 +98,8 @@ export default {
   },
 
   components: {
-    Card
+    Card,
+    SignInButton,
   },
   methods: {
     layerToPython(object) {
@@ -118,7 +120,7 @@ export default {
       this.dialog = false;
       this.response = {
         name: this.layerName,
-        hyperparameter: this.response_hyperparameter
+        hyperparameter: this.response_hyperparameter,
       };
       this.layer_state.push(this.response);
       this.response = {};
@@ -128,7 +130,7 @@ export default {
 
     removeLayer(index) {
       this.$delete(this.layer_state, index);
-    }
-  }
+    },
+  },
 };
 </script>
