@@ -18,7 +18,7 @@
             <h2>Layers:</h2>
             <draggable
               v-model="layer_state"
-              group="people"
+              group="layers"
               @start="drag = true"
               @end="drag = false"
             >
@@ -35,9 +35,18 @@
           </v-col>
         </v-row>
 
-        <v-btn color="#ff7000" @click="dialog = true">
-          <v-icon color="white">mdi-plus-thick</v-icon>
-        </v-btn>
+        <v-row>
+          <v-col>
+            <v-btn color="#ff7000" @click="dialog = true">
+              <v-icon color="white">mdi-plus-thick</v-icon>
+            </v-btn>
+          </v-col>
+          <v-col>
+            <v-btn color="#ff9000" @click="saveModel">
+              <v-text class="savemodel">Save Model</v-text>
+            </v-btn>
+          </v-col>
+        </v-row>
 
         <v-dialog v-model="dialog" max-width="700">
           <v-card>
@@ -59,13 +68,14 @@
                 :key="hyperparameter.name"
               >
                 <v-col>
-                  <v-card-text class="text">
+                  <v-card-text class="text formText">
                     {{ hyperparameter.name }}
                   </v-card-text>
                 </v-col>
                 <v-col>
                   <v-select
                     class="text"
+                    :label="hyperparameter.name"
                     v-if="hyperparameter.form.type === 'dropdown'"
                     v-model="response_hyperparameter[hyperparameter.name]"
                     :items="hyperparameter.form.options"
@@ -74,7 +84,9 @@
                   <v-text-field
                     class="text"
                     v-else
-                    label="value"
+                    :label="hyperparameter.name"
+                    background-color="white"
+                    color="#ff7000"
                     :type="hyperparameter.form.type"
                     v-model="response_hyperparameter[hyperparameter.name]"
                     :value="hyperparameter.value"
@@ -100,24 +112,24 @@
       </v-col>
       <v-col cols="6">
         <v-container>
-          <h1>Code:</h1>
           <ul class="list-group">
+            <v-row>
+              <v-col cols="3"><h2>Code:</h2></v-col>
+              <v-col cols="9" align="end">
+                <v-btn class="icon" @click="copyToClipBoard">
+                  <v-icon>mdi-clipboard-text-multiple-outline</v-icon>
+                </v-btn>
+              </v-col>
+            </v-row>
             <li
               class="list-group-item"
               v-for="(layer, index) in layer_state"
               :key="index"
             >
-              <pre>
-              <code v-highlight="code" class="python">{{ layerToPython(layer) }}</code>
-            </pre>
+              {{ layerToPython(layer) }}
             </li>
           </ul>
         </v-container>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="12" align="end">
-        <v-btn @click="saveModel"> Save Model </v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -141,14 +153,14 @@ export default {
       layerName: "Dense",
       layerNames: Object.keys(layers),
       response_hyperparameter: {},
-      response: {},
+      response: {}
     };
   },
 
   components: {
     Card,
     draggable,
-    SignInButton,
+    SignInButton
   },
   methods: {
     layerToPython(object) {
@@ -166,7 +178,7 @@ export default {
       this.dialog = false;
       this.response = {
         name: this.layerName,
-        hyperparameter: this.response_hyperparameter,
+        hyperparameter: this.response_hyperparameter
       };
       this.layer_state.push(this.response);
       this.response = {};
@@ -204,7 +216,10 @@ export default {
     removeLayer(index) {
       this.$delete(this.layer_state, index);
     },
-  },
+    copyToClipBoard() {
+      console.log("copied");
+    }
+  }
 };
 </script>
 
@@ -215,5 +230,23 @@ export default {
 
 .text {
   color: #ff7000;
+}
+
+.formText {
+  font-size: 1.2rem;
+}
+
+.icon {
+  transform: scale(0.8);
+}
+.list-group {
+  margin-top: 1rem;
+  border: 1px solid #5e5d5c;
+  padding-left: 5rem;
+  padding: 1rem;
+  box-shadow: 2px 1px rgb(177, 177, 177), 1px 2px rgb(197, 197, 197);
+}
+.savemodel {
+  color: white;
 }
 </style>
