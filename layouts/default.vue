@@ -56,21 +56,15 @@
 </template>
 
 <script>
-// import firebase from "firebase/app";
-// import "firebase/firestore";
-// import "firebase/auth";
-
 export default {
-  // data() {
-  //   return {
-  //     user: null,
-  //   };
-  // },
-  // mounted() {
-  //   firebase.auth.onAuthStateChanged((user) => {
-  //     console.log(user);
-  //     this.user = user;
-  //   });
-  // },
+  data() {
+    return {
+      user: null,
+    };
+  },
+  mounted() {
+    this.user = this.$store.state.user;
+    console.log(this.user);
+  },
 };
 </script>
