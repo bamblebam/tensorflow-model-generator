@@ -1,7 +1,13 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="12" align="end">
+      <v-col cols="3">
+        <v-text-field
+          placeholder="Project Name"
+          v-model="projectName"
+        ></v-text-field>
+      </v-col>
+      <v-col cols="9" align="end">
         <SignInButton />
       </v-col>
     </v-row>
@@ -10,7 +16,6 @@
         <v-row>
           <v-col cols="12">
             <h2>Layers:</h2>
-
             <draggable
               v-model="layer_state"
               group="people"
@@ -60,14 +65,16 @@
                 <v-col>
                   <v-select
                     v-if="hyperparameter.form.type === 'dropdown'"
-                    v-model="response_hyperparameter[hyperparameter.name]"
+                    :v-model="response_hyperparameter[hyperparameter.name]"
                     :items="hyperparameter.form.options"
+                    :value="hyperparameter.value"
                   ></v-select>
                   <v-text-field
                     v-else
                     label="value"
                     :type="hyperparameter.form.type"
-                    v-model="response_hyperparameter[hyperparameter.name]"
+                    :v-model="response_hyperparameter[hyperparameter.name]"
+                    :value="hyperparameter.value"
                     counter="50"
                     filled
                   />
