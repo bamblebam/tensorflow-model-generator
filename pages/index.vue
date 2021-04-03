@@ -165,12 +165,10 @@ export default {
     saveModel() {
       console.log("bam1");
       if (this.layer_state) {
-        console.log(this.response);
         firebase
           .firestore()
           .collection("models")
           .add({ ...this.layer_state });
-        console.log("bam2");
       }
     },
 
