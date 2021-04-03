@@ -23,13 +23,7 @@
             <v-card-title class="headline"> Layer name </v-card-title>
 
             <v-card-text>
-              <v-combobox :items="layerNames"> </v-combobox>
-              <v-text-field
-                label="Layer name"
-                v-model="layerName"
-                counter="50"
-                filled
-              />
+              <v-combobox v-model="layerName" :items="layerNames"> </v-combobox>
             </v-card-text>
             <v-card-text>
               <v-row
@@ -83,15 +77,12 @@ export default {
       layer_state: [],
       layersTemplate: layers,
       layerName: "Dense",
+      layerNames: Object.keys(layers)
     };
   },
-  // mounted:{
-  //   layerNames(){
-  //     return
-  //   }
-  // }
+
   components: {
-    Card,
+    Card
   },
   methods: {
     layerToPython(object) {
@@ -110,14 +101,14 @@ export default {
 
     addLayer() {
       const object = {
-        name: "jugik",
+        name: "jugik"
       };
       this.layer_state.push(object);
     },
 
     removeLayer(index) {
       this.$delete(this.layer_state, index);
-    },
-  },
+    }
+  }
 };
 </script>
