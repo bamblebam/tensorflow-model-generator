@@ -1,6 +1,10 @@
 <template>
-  <ul class="list-group">
-    <li class="list-group-item" v-for="(layer, index) in layers" :key="index">
+  <ul v-if="layer_state.length > 0" class="list-group">
+    <li
+      class="list-group-item"
+      v-for="(layer, index) in layer_state"
+      :key="index"
+    >
       {{ layerToPython(layer) }}
     </li>
   </ul>
@@ -14,7 +18,7 @@ import layers from "~/tensorflow_data/tensorflow_data.js";
 export default {
   data() {
     return {
-      layers,
+      layer_state: [],
     };
   },
   components: {
