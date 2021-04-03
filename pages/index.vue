@@ -174,8 +174,20 @@ export default {
     },
 
     saveModel() {
-      if (this.layer_state) {
-        uid = uuidv4();
+      if (this.layer_state && this.$store.state.user) {
+        const uid = uuidv4();
+        firebase
+          .firestore()
+          .collection("users")
+          .doc(this.$store.state.user.uid)
+          .set(this.$store.state.user);
+        firebase
+          .firestore()
+          .collection("users")
+          .doc(this.$store.state.user.uid)
+          .update({
+            models: firebase.firestore.FieldValue.arrayUnion(uid),
+          });
         firebase
           .firestore()
           .collection("models")
