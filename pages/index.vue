@@ -7,7 +7,7 @@
           v-model="project_name"
         ></v-text-field>
       </v-col>
-      <v-col cols="9" align="end">
+      <v-col v-if="this.$store.state.user === null" cols="9" align="end">
         <SignInButton />
       </v-col>
     </v-row>
