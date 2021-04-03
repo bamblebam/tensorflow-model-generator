@@ -160,7 +160,7 @@ export default {
   data() {
     return {
       dialog: false,
-      layer_state: [] || this.$store.state.model,
+      layer_state: [],
       layersTemplate: layers,
       layerName: "Dense",
       layerNames: Object.keys(layers),
@@ -173,13 +173,18 @@ export default {
     };
   },
 
+  mounted() {
+    var model = this.$store.state.model.layers;
+    this.user = this.$store.state.user;
+    if (model) {
+      this.layer_state = model;
+    }
+  },
+
   components: {
     Card,
     draggable,
     SignInButton,
-  },
-  mounted() {
-    this.user = this.$store.state.user;
   },
   methods: {
     layerToPython(object) {
