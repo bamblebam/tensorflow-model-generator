@@ -133,13 +133,15 @@
                 </v-btn>
               </v-col>
             </v-row>
+            <li>model = [</li>
             <li
               class="list-group-item"
               v-for="(layer, index) in layer_state"
               :key="index"
             >
-              {{ layerToPython(layer) }}
+              {{ layerToPython(layer) }},
             </li>
+            <li>]</li>
           </ul>
         </v-container>
       </v-col>
