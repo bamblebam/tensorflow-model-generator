@@ -35,9 +35,18 @@
           </v-col>
         </v-row>
 
-        <v-btn color="#ff7000" @click="dialog = true">
-          <v-icon color="white">mdi-plus-thick</v-icon>
-        </v-btn>
+        <v-row>
+          <v-col>
+            <v-btn color="#ff7000" @click="dialog = true">
+              <v-icon color="white">mdi-plus-thick</v-icon>
+            </v-btn>
+          </v-col>
+          <v-col>
+            <v-btn @click="saveModel">
+              Save Model
+            </v-btn>
+          </v-col>
+        </v-row>
 
         <v-dialog v-model="dialog" max-width="700">
           <v-card>
@@ -61,13 +70,14 @@
                 :key="hyperparameter.name"
               >
                 <v-col>
-                  <v-card-text class="text">
+                  <v-card-text class="text formText">
                     {{ hyperparameter.name }}
                   </v-card-text>
                 </v-col>
                 <v-col>
                   <v-select
                     class="text"
+                    :label="hyperparameter.name"
                     v-if="hyperparameter.form.type === 'dropdown'"
                     v-model="response_hyperparameter[hyperparameter.name]"
                     :items="hyperparameter.form.options"
@@ -76,7 +86,7 @@
                   <v-text-field
                     class="text"
                     v-else
-                    label="value"
+                    :label="hyperparameter.name"
                     background-color="white"
                     color="#ff7000"
                     :type="hyperparameter.form.type"
@@ -104,7 +114,7 @@
       </v-col>
       <v-col cols="6">
         <v-container>
-          <h1>Code:</h1>
+          <h2>Code:</h2>
           <ul class="list-group">
             <li
               class="list-group-item"
@@ -118,11 +128,7 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="12" align="end">
-        <v-btn @click="saveModel">
-          Save Model
-        </v-btn>
-      </v-col>
+      <v-col cols="12" align="end"> </v-col>
     </v-row>
   </v-container>
 </template>
@@ -199,5 +205,9 @@ export default {
 
 .text {
   color: #ff7000;
+}
+
+.formText {
+  font-size: 1.2rem;
 }
 </style>
