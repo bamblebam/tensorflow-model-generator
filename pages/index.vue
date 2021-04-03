@@ -4,7 +4,7 @@
       <v-col cols="6">
         <v-row>
           <v-col cols="12">
-            <v-item v-for="(layer, index) in layersTemplate" :key="index">
+            <v-item v-for="(layer, index) in layer_state" :key="index">
               <v-row>
                 <Card
                   v-bind:layerData="layer"
@@ -53,7 +53,7 @@
               <v-btn color="red darken-1" text @click="dialog = false">
                 Cancel
               </v-btn>
-              <v-btn color="green darken-1" text @click="add">
+              <v-btn color="green darken-1" text @click="addLayer">
                 Add Layer
               </v-btn>
             </v-card-actions>
@@ -62,7 +62,6 @@
       </v-col>
       <v-col cols="6">Code here</v-col>
     </v-row>
-    <v-btn @click="addLayer">Click</v-btn>
   </v-container>
 </template>
 
@@ -77,12 +76,12 @@ export default {
       layer_state: [],
       layersTemplate: layers,
       layerName: "Dense",
-      layerNames: Object.keys(layers)
+      layerNames: Object.keys(layers),
     };
   },
 
   components: {
-    Card
+    Card,
   },
   methods: {
     layerToPython(object) {
@@ -101,14 +100,14 @@ export default {
 
     addLayer() {
       const object = {
-        name: "jugik"
+        name: "jugik",
       };
       this.layer_state.push(object);
     },
 
     removeLayer(index) {
       this.$delete(this.layer_state, index);
-    }
-  }
+    },
+  },
 };
 </script>
