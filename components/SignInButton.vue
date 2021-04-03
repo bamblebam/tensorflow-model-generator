@@ -13,12 +13,20 @@
 <script>
 export default {
   methods: {
-    signInPopup: async function() {
+    signInPopup: async function () {
+      var user = null;
       var provider = new this.$firebase.auth.GoogleAuthProvider();
-      const result = await this.$firebase.auth().signInWithPopup(provider);
-      var user = result.user;
-      console.log(user);
-    }
-  }
+      this.$firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then((res) => {
+          user = result.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  },
 };
 </script>

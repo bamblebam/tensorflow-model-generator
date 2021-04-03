@@ -1,4 +1,5 @@
 import firebase from 'firebase'
+import 'firebase/firestore'
 
 var firebaseConfig = {
     apiKey: "AIzaSyA6ZHaxj5F2KlPXB1lcDSIUao-LTowPRH8",
@@ -9,7 +10,7 @@ var firebaseConfig = {
     appId: "1:947742925120:web:0d1d1f1dfe295170595aa5"
 };
 
-let app = null
+var app = null
 if (!firebase.apps.length) {
     app = firebase.initializeApp(firebaseConfig)
 }

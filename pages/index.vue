@@ -38,6 +38,9 @@
         <v-btn color="#ff7000" @click="dialog = true">
           <v-icon color="white">mdi-plus-thick</v-icon>
         </v-btn>
+        <v-btn color="#ff7000 " @click="saveModel">
+          <v-icon color="black">mdi-plus-thick</v-icon>
+        </v-btn>
 
         <v-dialog overlay-color="#ff7000 " v-model="dialog" max-width="700">
           <v-card>
@@ -117,6 +120,8 @@
 import Card from "@/components/Card";
 import SignInButton from "@/components/SignInButton";
 import layers from "@/tensorflow_data/tensorflow_data";
+import firebase from "firebase/app";
+import "firebase/firestore";
 import draggable from "vuedraggable";
 
 export default {
@@ -128,14 +133,14 @@ export default {
       layerName: "Dense",
       layerNames: Object.keys(layers),
       response_hyperparameter: {},
-      response: {}
+      response: {},
     };
   },
 
   components: {
     Card,
     draggable,
-    SignInButton
+    SignInButton,
   },
   methods: {
     layerToPython(object) {
@@ -157,17 +162,27 @@ export default {
       this.dialog = false;
       this.response = {
         name: this.layerName,
-        hyperparameter: this.response_hyperparameter
+        hyperparameter: this.response_hyperparameter,
       };
       this.layer_state.push(this.response);
       this.response = {};
       this.response_hyperparameter = {};
     },
 
+    saveModel() {
+      console.log("bam1");
+      if (this.layer_state) {
+        firebase
+          .firestore()
+          .collection("models")
+          .add({ ...this.layer_state });
+      }
+    },
+
     removeLayer(index) {
       this.$delete(this.layer_state, index);
-    }
-  }
+    },
+  },
 };
 </script>
 

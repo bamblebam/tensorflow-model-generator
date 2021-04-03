@@ -38,7 +38,27 @@ export default {
     // https://go.nuxtjs.dev/axios
     "@nuxtjs/axios",
     // https://go.nuxtjs.dev/pwa
-    "@nuxtjs/pwa"
+    "@nuxtjs/pwa",
+    [
+      '@nuxtjs/firebase',
+      {
+        config: {
+          apiKey: "AIzaSyA6ZHaxj5F2KlPXB1lcDSIUao-LTowPRH8",
+          authDomain: "tensorflow-model-generator.firebaseapp.com",
+          projectId: "tensorflow-model-generator",
+          storageBucket: "tensorflow-model-generator.appspot.com",
+          messagingSenderId: "947742925120",
+          appId: "1:947742925120:web:0d1d1f1dfe295170595aa5"
+        },
+        services: {
+          auth: true,
+          firestore: true,
+          functions: true,
+          storage: true,
+          database: true,
+        }
+      }
+    ]
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
