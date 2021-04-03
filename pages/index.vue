@@ -21,6 +21,7 @@
             </v-card-title>
 
             <v-card-text>
+              <v-combobox :items="layerNames"> </v-combobox>
               <v-text-field
                 label="Layer name"
                 v-model="layerName"
@@ -81,6 +82,11 @@ export default {
       layerName: "Dense"
     };
   },
+  // mounted:{
+  //   layerNames(){
+  //     return
+  //   }
+  // }
   components: {
     Card
   },
@@ -93,6 +99,10 @@ export default {
       line = line.substring(0, line.length - 1);
       line += ")";
       return line;
+    },
+
+    add() {
+      console.log(this.value);
     }
   }
 };
