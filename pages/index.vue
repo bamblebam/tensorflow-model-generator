@@ -39,7 +39,7 @@
                 <v-col>
                   <v-text-field
                     label="value"
-                    v-model="value"
+                    v-model="response_hyperparameter[hyperparameter.name]"
                     counter="50"
                     filled
                   />
@@ -53,7 +53,7 @@
               <v-btn color="red darken-1" text @click="dialog = false">
                 Cancel
               </v-btn>
-              <v-btn color="green darken-1" text @click="add">
+              <v-btn color="green darken-1" text @click="addLayer">
                 Add Layer
               </v-btn>
             </v-card-actions>
@@ -77,7 +77,9 @@ export default {
       layer_state: [],
       layersTemplate: layers,
       layerName: "Dense",
-      layerNames: Object.keys(layers)
+      layerNames: Object.keys(layers),
+      response_hyperparameter: {},
+      response: {}
     };
   },
 
@@ -100,10 +102,12 @@ export default {
     },
 
     addLayer() {
-      const object = {
-        name: "jugik"
+      this.response = {
+        name: this.layerName,
+        hyperparameter: this.response_hyperparameter
       };
-      this.layer_state.push(object);
+      console.log(this.response_hyperparameter);
+      this.layer_state.push(this.response);
     },
 
     removeLayer(index) {

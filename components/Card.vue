@@ -12,11 +12,13 @@
       <v-card-text>
         <v-row>
           <v-item
-            v-for="hyperparameter in this.hyperparameters"
-            :key="hyperparameter.name"
+            v-for="[key, value] in Object.entries(
+              this.layerData.hyperparameter
+            )"
+            :key="key"
           >
             <v-container>
-              <p>{{ hyperparameter.name }} : {{ hyperparameter.value }}</p>
+              <p>{{ key }} : {{ value }}</p>
             </v-container>
           </v-item>
         </v-row>
@@ -29,10 +31,10 @@
 export default {
   data() {
     return {
-      hyperparameters: this.layerData.hyperparameters,
+      hyperparameters: this.layerData.hyperparameters
     };
   },
-  props: ["layerData", "method", "index"],
+  props: ["layerData", "method", "index"]
 };
 </script>
 
