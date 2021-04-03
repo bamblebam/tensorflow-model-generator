@@ -133,7 +133,7 @@
                 </v-btn>
               </v-col>
             </v-row>
-            <li>model = [</li>
+            <li>model = Sequential([</li>
             <li
               class="list-group-item"
               v-for="(layer, index) in layer_state"
@@ -141,7 +141,7 @@
             >
               {{ layerToPython(layer) }},
             </li>
-            <li>]</li>
+            <li>])</li>
           </ul>
         </v-container>
       </v-col>
