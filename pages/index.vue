@@ -18,6 +18,7 @@
         <v-btn @click="dialog = true">
           <v-icon>mdi-plus-thick</v-icon>
         </v-btn>
+        <SignInButton />
         <v-dialog v-model="dialog" max-width="320">
           <v-card>
             <v-card-title class="headline"> Layer name </v-card-title>
@@ -67,6 +68,7 @@
 
 <script>
 import Card from "@/components/Card";
+import SignInButton from "@/components/SignInButton";
 import layers from "@/tensorflow_data/tensorflow_data";
 
 export default {
@@ -84,6 +86,7 @@ export default {
 
   components: {
     Card,
+    SignInButton,
   },
   methods: {
     layerToPython(object) {
