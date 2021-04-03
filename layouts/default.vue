@@ -49,7 +49,9 @@
       <v-col cols="10">
         <v-main>
           <v-container>
-            <nuxt />
+            <v-slide-x-transition>
+              <nuxt />
+            </v-slide-x-transition>
           </v-container>
         </v-main>
       </v-col>
