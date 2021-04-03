@@ -135,6 +135,18 @@ const layers = {
         value: "None"
       }
     }
+  },
+  Reshape: {
+    name: "Reshape",
+    hyperparameters: {
+      target_shape: {
+        name: "target_shape",
+        form: {
+          type: "tuple"
+        },
+        value: (0, 1)
+      }
+    }
   }
 };
 
