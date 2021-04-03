@@ -32,11 +32,11 @@ export default {
   data() {
     return {
       layer_state: [],
-      layersTemplate: layers
+      layersTemplate: layers,
     };
   },
   components: {
-    Card
+    Card,
   },
   methods: {
     layerToPython(object) {
@@ -50,7 +50,7 @@ export default {
     },
     test() {
       console.log(this.layersTemplate);
-    }
-  }
+    },
+  },
 };
 </script>
