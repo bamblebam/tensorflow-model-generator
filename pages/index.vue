@@ -153,14 +153,14 @@ export default {
       layerName: "Dense",
       layerNames: Object.keys(layers),
       response_hyperparameter: {},
-      response: {}
+      response: {},
     };
   },
 
   components: {
     Card,
     draggable,
-    SignInButton
+    SignInButton,
   },
   methods: {
     layerToPython(object) {
@@ -178,7 +178,7 @@ export default {
       this.dialog = false;
       this.response = {
         name: this.layerName,
-        hyperparameter: this.response_hyperparameter
+        hyperparameter: this.response_hyperparameter,
       };
       this.layer_state.push(this.response);
       this.response = {};
@@ -211,15 +211,25 @@ export default {
           .collection("models")
           .add({ uid, model_name, ...this.layer_state });
       }
+      this.response_hyperparameter = {};
+      this.response = {};
+      this.layer_state = [];
     },
 
     removeLayer(index) {
       this.$delete(this.layer_state, index);
     },
+
+    discardModel() {
+      this.response_hyperparameter = {};
+      this.response = {};
+      this.layer_state = [];
+    },
+
     copyToClipBoard() {
       console.log("copied");
-    }
-  }
+    },
+  },
 };
 </script>
 
