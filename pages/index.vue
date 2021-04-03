@@ -90,14 +90,14 @@
       </v-col>
       <v-col cols="6">
         <v-container>
-          <h1>bam</h1>
+          <h1>Code:</h1>
           <ul class="list-group">
             <li
               class="list-group-item"
               v-for="(layer, index) in layer_state"
               :key="index"
             >
-              {{ layerToPython(layer) }}
+              {{ layerToPython(layer) }},
             </li>
           </ul>
         </v-container>
@@ -163,3 +163,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.list-group {
+  list-style: none;
+}
+</style>
