@@ -39,7 +39,7 @@
                 <v-col>
                   <v-text-field
                     label="value"
-                    v-model="value"
+                    v-model="response_hyperparameter[hyperparameter.name]"
                     counter="50"
                     filled
                   />
@@ -77,6 +77,8 @@ export default {
       layersTemplate: layers,
       layerName: "Dense",
       layerNames: Object.keys(layers),
+      response_hyperparameter: {},
+      response: {},
     };
   },
 
@@ -99,10 +101,12 @@ export default {
     },
 
     addLayer() {
-      const object = {
-        name: "jugik",
+      this.response = {
+        name: this.layerName,
+        hyperparameter: this.response_hyperparameter,
       };
-      this.layer_state.push(object);
+      console.log(this.response_hyperparameter);
+      this.layer_state.push(this.response);
     },
 
     removeLayer(index) {
