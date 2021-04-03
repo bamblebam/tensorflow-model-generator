@@ -7,7 +7,7 @@
           v-model="project_name"
         ></v-text-field>
       </v-col>
-      <v-col cols="9" align="end">
+      <v-col v-if="this.$store.state.user === null" cols="9" align="end">
         <SignInButton />
       </v-col>
     </v-row>
@@ -169,7 +169,7 @@ export default {
       edited: false,
       index: 0,
       projectName: "",
-      user: null
+      user: null,
     };
   },
 
@@ -184,7 +184,7 @@ export default {
   components: {
     Card,
     draggable,
-    SignInButton
+    SignInButton,
   },
   methods: {
     layerToPython(object) {
@@ -203,7 +203,7 @@ export default {
       this.dialog = false;
       this.response = {
         name: this.layerName,
-        hyperparameter: this.response_hyperparameter
+        hyperparameter: this.response_hyperparameter,
       };
 
       if (!this.edited) {
@@ -225,7 +225,7 @@ export default {
           .firestore()
           .collection("users")
           .doc(this.$store.state.user.uid);
-        userref.get().then(doc => {
+        userref.get().then((doc) => {
           if (!doc.exists) {
             userref.set({ models: [uid], ...this.$store.state.user });
           }
@@ -235,13 +235,13 @@ export default {
           .collection("users")
           .doc(this.$store.state.user.uid)
           .update({
-            models: firebase.firestore.FieldValue.arrayUnion(uid)
+            models: firebase.firestore.FieldValue.arrayUnion(uid),
           });
         firebase
           .firestore()
           .collection("models")
           .doc(uid)
-          .set({ model_name, layers: this.layer_state });
+          .set({ uid, model_name, layers: this.layer_state });
       }
       this.response_hyperparameter = {};
       this.response = {};
@@ -271,8 +271,8 @@ export default {
 
     copyToClipBoard() {
       console.log("copied");
-    }
-  }
+    },
+  },
 };
 </script>
 
