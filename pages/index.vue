@@ -292,6 +292,7 @@ export default {
           index
         ].hyperparameter[hyper];
       }
+      this.index = index;
       this.layerName = this.layer_state[index].name;
       this.dialog = true;
       this.edited = true;
