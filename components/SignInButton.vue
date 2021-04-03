@@ -14,12 +14,12 @@ export default {
         .signInWithPopup(provider)
         .then((res) => {
           var user = {
-            username: res.user.displayname,
+            username: res.user.displayName,
             email: res.user.email,
             uid: res.user.uid,
           };
           this.$store.commit("addUser", user);
-          console.log(this.$store.state.user);
+          console.log(res.user);
         })
         .catch((error) => {
           console.log(error);
