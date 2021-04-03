@@ -178,11 +178,12 @@ export default {
   },
 
   mounted() {
-    var model = this.$store.state.model;
+    var model = this.$store.state.model.layers;
+    var projectName = this.$store.state.model.model_name;
     this.user = this.$store.state.user;
     if (model) {
-      this.layer_state = model.layers;
-      this.project_name = model.model_name;
+      this.layer_state = model;
+      this.project_name = projectName;
     }
   },
 
@@ -314,8 +315,15 @@ export default {
       } catch (error) {
         console.log(error);
       }
+<<<<<<< HEAD
     },
   },
+=======
+
+      console.log("copied");
+    }
+  }
+>>>>>>> e2cfd958800ce874a69a26b2534d24d9f3db7858
 };
 </script>
 
