@@ -183,16 +183,20 @@ export default {
         //     if(!)
         //   })
         // var model2 = [];
+        const userref = firebase
+          .firestore()
+          .collection("users")
+          .doc(this.$store.state.user.uid);
+        userref.get().then((doc) => {
+          if (!doc.exists) {
+            userref.set({ models: [uid], ...this.$store.state.user });
+          }
+        });
         // firebase
         //   .firestore()
         //   .collection("users")
         //   .doc(this.$store.state.user.uid)
-        //   .get()
-        //   .then((doc) => {
-        //     model2 = doc.models;
-        //     console.log(doc);
-        //   });
-        // console.log(model2);
+        //   .get();
         firebase
           .firestore()
           .collection("users")
