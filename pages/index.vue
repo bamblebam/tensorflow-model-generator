@@ -160,7 +160,7 @@ export default {
   data() {
     return {
       dialog: false,
-      layer_state: this.$store.state.model || [],
+      layer_state: [] || this.$store.state.model,
       layersTemplate: layers,
       layerName: "Dense",
       layerNames: Object.keys(layers),
@@ -171,11 +171,6 @@ export default {
       projectName: "",
       user: null,
     };
-  },
-
-  mounted() {
-    var model = this.$store.state.model;
-    console.log(model);
   },
 
   components: {
