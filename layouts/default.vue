@@ -14,9 +14,7 @@
 
             <v-list-item link>
               <v-list-item-content>
-                <v-list-item-title class="title">
-                  Test user
-                </v-list-item-title>
+                <v-list-item-title class="title"> Test user </v-list-item-title>
                 <v-list-item-subtitle>test_user@gmail.com</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
@@ -58,5 +56,21 @@
 </template>
 
 <script>
-export default {};
+// import firebase from "firebase/app";
+// import "firebase/firestore";
+// import "firebase/auth";
+
+export default {
+  // data() {
+  //   return {
+  //     user: null,
+  //   };
+  // },
+  // mounted() {
+  //   firebase.auth.onAuthStateChanged((user) => {
+  //     console.log(user);
+  //     this.user = user;
+  //   });
+  // },
+};
 </script>

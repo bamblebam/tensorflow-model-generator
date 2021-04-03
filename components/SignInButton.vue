@@ -17,7 +17,13 @@ export default {
         .auth()
         .signInWithPopup(provider)
         .then((res) => {
-          console.log(res.user);
+          var user = {
+            username: res.user.displayname,
+            email: res.user.email,
+            uid: res.user.uid,
+          };
+          this.$store.commit("addUser", user);
+          console.log(this.$store.state.user);
         })
         .catch((error) => {
           console.log(error);
