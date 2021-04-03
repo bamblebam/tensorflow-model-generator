@@ -16,6 +16,7 @@
             <v-icon>mdi-plus-thick</v-icon>
           </v-flex>
         </v-row>
+        <h1>Something</h1>
       </v-col>
       <v-col cols="6">Code here</v-col>
     </v-row>
