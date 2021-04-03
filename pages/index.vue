@@ -17,25 +17,23 @@
 
         <v-row>
           <v-col cols="12">
-            <v-card class="overflow-y-auto" max-height="400">
-              <draggable
-                v-model="layer_state"
-                group="layers"
-                @start="drag = true"
-                @end="drag = false"
-              >
-                <v-item v-for="(layer, index) in layer_state" :key="index">
-                  <v-row no-gutters>
-                    <Card
-                      v-bind:layerData="layer"
-                      v-bind:method="removeLayer"
-                      v-bind:edit="editLayer"
-                      v-bind:index="index"
-                    />
-                  </v-row>
-                </v-item>
-              </draggable>
-            </v-card>
+            <draggable
+              v-model="layer_state"
+              group="layers"
+              @start="drag = true"
+              @end="drag = false"
+            >
+              <v-item v-for="(layer, index) in layer_state" :key="index">
+                <v-row no-gutters>
+                  <Card
+                    v-bind:layerData="layer"
+                    v-bind:method="removeLayer"
+                    v-bind:edit="editLayer"
+                    v-bind:index="index"
+                  />
+                </v-row>
+              </v-item>
+            </draggable>
           </v-col>
         </v-row>
 
