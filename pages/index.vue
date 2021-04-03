@@ -174,16 +174,17 @@ export default {
       response: {},
       edited: false,
       index: 0,
-      projectName: "",
+      project_name: "",
       user: null
     };
   },
 
   mounted() {
-    var model = this.$store.state.model.layers;
+    var model = this.$store.state.model;
     this.user = this.$store.state.user;
     if (model) {
-      this.layer_state = model;
+      this.layer_state = model.layers;
+      this.project_name = model.model_name;
     }
   },
 
