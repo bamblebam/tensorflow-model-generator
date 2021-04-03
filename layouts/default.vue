@@ -14,9 +14,7 @@
 
             <v-list-item link>
               <v-list-item-content>
-                <v-list-item-title class="title">
-                  Test user
-                </v-list-item-title>
+                <v-list-item-title class="title"> Test user </v-list-item-title>
                 <v-list-item-subtitle>test_user@gmail.com</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
@@ -60,5 +58,15 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      user: null,
+    };
+  },
+  mounted() {
+    this.user = this.$store.state.user;
+    console.log(this.user);
+  },
+};
 </script>
