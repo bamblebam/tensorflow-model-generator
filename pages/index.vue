@@ -38,16 +38,16 @@
         <v-btn color="#ff7000" @click="dialog = true">
           <v-icon color="white">mdi-plus-thick</v-icon>
         </v-btn>
-        <v-btn color="#ff7000 " @click="saveModel">
-          <v-icon color="black">mdi-plus-thick</v-icon>
-        </v-btn>
 
-        <v-dialog overlay-color="#ff7000 " v-model="dialog" max-width="700">
+        <v-dialog v-model="dialog" max-width="700">
           <v-card>
-            <v-card-title class="headline"> Layer </v-card-title>
+            <v-card-title class="text">
+              Layer
+            </v-card-title>
 
             <v-card-text>
               <v-combobox
+                class="text"
                 placeholder="Layer Name"
                 v-model="layerName"
                 :items="layerNames"
@@ -61,22 +61,24 @@
                 :key="hyperparameter.name"
               >
                 <v-col>
-                  <v-card-text>
+                  <v-card-text class="text">
                     {{ hyperparameter.name }}
                   </v-card-text>
                 </v-col>
                 <v-col>
                   <v-select
+                    class="text"
                     v-if="hyperparameter.form.type === 'dropdown'"
-                    :v-model="response_hyperparameter[hyperparameter.name]"
+                    v-model="response_hyperparameter[hyperparameter.name]"
                     :items="hyperparameter.form.options"
                     :value="hyperparameter.value"
                   ></v-select>
                   <v-text-field
+                    class="text"
                     v-else
                     label="value"
                     :type="hyperparameter.form.type"
-                    :v-model="response_hyperparameter[hyperparameter.name]"
+                    v-model="response_hyperparameter[hyperparameter.name]"
                     :value="hyperparameter.value"
                     counter="50"
                     filled
@@ -113,6 +115,13 @@
         </v-container>
       </v-col>
     </v-row>
+    <v-row>
+      <v-col cols="12" align="end">
+        <v-btn @click="saveModel">
+          Save Model
+        </v-btn>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -133,14 +142,14 @@ export default {
       layerName: "Dense",
       layerNames: Object.keys(layers),
       response_hyperparameter: {},
-      response: {},
+      response: {}
     };
   },
 
   components: {
     Card,
     draggable,
-    SignInButton,
+    SignInButton
   },
   methods: {
     layerToPython(object) {
@@ -154,15 +163,11 @@ export default {
       return line;
     },
 
-    test() {
-      console.log(this.layersTemplate);
-    },
-
     addLayer() {
       this.dialog = false;
       this.response = {
         name: this.layerName,
-        hyperparameter: this.response_hyperparameter,
+        hyperparameter: this.response_hyperparameter
       };
       this.layer_state.push(this.response);
       this.response = {};
@@ -170,7 +175,6 @@ export default {
     },
 
     saveModel() {
-      console.log("bam1");
       if (this.layer_state) {
         firebase
           .firestore()
@@ -181,13 +185,17 @@ export default {
 
     removeLayer(index) {
       this.$delete(this.layer_state, index);
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style scoped>
 .list-group {
   list-style: none;
+}
+
+.text {
+  color: #ff7000;
 }
 </style>
