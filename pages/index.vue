@@ -175,25 +175,30 @@ export default {
 
     saveModel() {
       if (this.layer_state && this.$store.state.user) {
-        const uid = uuidv4();
+        var uid = uuidv4();
         // firebase
         //   .firestore()
         //   .collection("users")
         //   .doc(this.$store.state.user.uid).get().then(doc=>{
         //     if(!)
         //   })
+        // var model2 = [];
         // firebase
         //   .firestore()
         //   .collection("users")
         //   .doc(this.$store.state.user.uid)
-        //   .set(this.$store.state.user);
+        //   .get()
+        //   .then((doc) => {
+        //     model2 = doc.models;
+        //     console.log(doc);
+        //   });
+        // console.log(model2);
         firebase
           .firestore()
           .collection("users")
           .doc(this.$store.state.user.uid)
-          .set({
+          .update({
             models: firebase.firestore.FieldValue.arrayUnion(uid),
-            ...this.$store.state.user,
           });
         firebase
           .firestore()
