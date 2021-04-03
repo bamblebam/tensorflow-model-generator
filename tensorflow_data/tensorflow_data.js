@@ -103,6 +103,38 @@ const layers = {
         value: "zeros"
       }
     }
+  },
+  SpatialDropout1D: {
+    name: "SpatialDropout1D",
+    hyperparameters: {
+      rate: {
+        name: "rate",
+        form: {
+          type: "float"
+        },
+        value: 0
+      }
+    }
+  },
+  SpatialDropout2D: {
+    name: "SpatialDropout2D",
+    hyperparameters: {
+      rate: {
+        name: "rate",
+        form: {
+          type: "float"
+        },
+        value: 0
+      },
+      data_format: {
+        name: "data_format",
+        form: {
+          type: "dropdown",
+          options: "['channels_first' , 'channels_last']"
+        },
+        value: "None"
+      }
+    }
   }
 };
 
