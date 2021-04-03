@@ -23,8 +23,6 @@
 </template>
 
 <script>
-import Logo from "~/components/Logo.vue";
-import VuetifyLogo from "~/components/VuetifyLogo.vue";
 import Card from "@/components/Card";
 import layers from "~/tensorflow_data/tensorflow_data.js";
 
@@ -35,8 +33,6 @@ export default {
     };
   },
   components: {
-    Logo,
-    VuetifyLogo,
     Card,
   },
   methods: {
