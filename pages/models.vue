@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <h1>My models:</h1>
     <v-card>
       <v-card-title>Project Name</v-card-title>
       <v-card-subtitle>Project date</v-card-subtitle>
@@ -8,10 +9,7 @@
 </template>
 
 <script>
-import Card from "~/components/Card.vue";
-export default {
-  components: { Card }
-};
+export default {};
 </script>
 
 <style></style>

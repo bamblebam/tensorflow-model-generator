@@ -37,11 +37,11 @@
               </v-list-item-icon>
               <v-list-item-title>My models</v-list-item-title>
             </v-list-item>
-            <v-list-item to="/account">
+            <v-list-item>
               <v-list-item-icon>
-                <v-icon>mdi-account-multiple</v-icon>
+                <v-icon>mdi-exit-to-app</v-icon>
               </v-list-item-icon>
-              <v-list-item-title>Account</v-list-item-title>
+              <v-list-item-title>Logout</v-list-item-title>
             </v-list-item>
           </v-list>
         </v-navigation-drawer>
