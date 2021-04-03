@@ -21,13 +21,7 @@
             </v-card-title>
 
             <v-card-text>
-              <v-combobox :items="layerNames"> </v-combobox>
-              <v-text-field
-                label="Layer name"
-                v-model="layerName"
-                counter="50"
-                filled
-              />
+              <v-combobox v-model="layerName" :items="layerNames"> </v-combobox>
             </v-card-text>
             <v-card-text>
               <v-row
@@ -79,14 +73,11 @@ export default {
       dialog: false,
       layer_state: [],
       layersTemplate: layers,
-      layerName: "Dense"
+      layerName: "Dense",
+      layerNames: Object.keys(layers)
     };
   },
-  // mounted:{
-  //   layerNames(){
-  //     return
-  //   }
-  // }
+
   components: {
     Card
   },
