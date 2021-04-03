@@ -4,16 +4,64 @@
       <v-col cols="6">
         <v-row>
           <v-col cols="12">
-            <v-item v-for="(layer, index) in layersTemplate" :key="index">
+            <v-item v-for="(layer, index) in layer" :key="index">
               <v-row>
                 <Card v-bind:layerData="layer" />
               </v-row>
             </v-item>
           </v-col>
         </v-row>
-        <v-btn>
+        <v-btn @click="dialog = true">
           <v-icon>mdi-plus-thick</v-icon>
         </v-btn>
+        <v-dialog v-model="dialog" max-width="320">
+          <v-card>
+            <v-card-title class="headline">
+              Layer name
+            </v-card-title>
+
+            <v-card-text>
+              <v-text-field
+                label="Layer name"
+                v-model="layerName"
+                counter="50"
+                filled
+              />
+            </v-card-text>
+            <v-card-text>
+              <v-row
+                v-for="hyperparameter in this.layersTemplate[this.layerName]
+                  .hyperparameters"
+                :key="hyperparameter.name"
+              >
+                <v-col>
+                  <v-card-text>
+                    {{ hyperparameter.name }}
+                  </v-card-text>
+                </v-col>
+                <v-col>
+                  <v-text-field
+                    label="value"
+                    v-model="value"
+                    counter="50"
+                    filled
+                  />
+                </v-col>
+              </v-row>
+            </v-card-text>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+
+              <v-btn color="red darken-1" text @click="dialog = false">
+                Cancel
+              </v-btn>
+              <v-btn color="green darken-1" text @click="add">
+                Add Layer
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-col>
       <v-col cols="6">Code here</v-col>
     </v-row>
@@ -27,8 +75,10 @@ import layers from "@/tensorflow_data/tensorflow_data";
 export default {
   data() {
     return {
+      dialog: false,
       layer_state: [],
-      layersTemplate: layers
+      layersTemplate: layers,
+      layerName: "Dense"
     };
   },
   components: {
