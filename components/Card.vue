@@ -9,7 +9,14 @@
       </v-card-title>
       <v-card-text>
         <v-row>
-          <v-col>Parameters</v-col>
+          <v-item
+            v-for="hyperparameter in this.hyperparameters"
+            :key="hyperparameter.name"
+          >
+            <v-container>
+              <p>{{ hyperparameter.name }} : {{ hyperparameter.value }}</p>
+            </v-container>
+          </v-item>
         </v-row>
       </v-card-text>
     </v-card>
@@ -18,6 +25,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      hyperparameters: this.layerData.hyperparameters
+    };
+  },
   props: ["layerData"]
 };
 </script>

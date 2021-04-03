@@ -11,16 +11,12 @@
             </v-item>
           </v-col>
         </v-row>
-        <v-row align="end">
-          <v-flex justify="end">
-            <v-icon>mdi-plus-thick</v-icon>
-          </v-flex>
-        </v-row>
-        <h1>Something</h1>
+        <v-btn>
+          <v-icon>mdi-plus-thick</v-icon>
+        </v-btn>
       </v-col>
       <v-col cols="6">Code here</v-col>
     </v-row>
-    <v-btn @click="test">Click</v-btn>
   </v-container>
 </template>
 
@@ -47,9 +43,6 @@ export default {
       line = line.substring(0, line.length - 1);
       line += ")";
       return line;
-    },
-    test() {
-      console.log(this.layersTemplate);
     }
   }
 };
