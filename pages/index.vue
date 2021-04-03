@@ -76,7 +76,16 @@
       </v-col>
       <v-col cols="6">
         <v-container>
-          {{ this.code }}
+          <h1>bam</h1>
+          <ul class="list-group">
+            <li
+              class="list-group-item"
+              v-for="(layer, index) in layer_state"
+              :key="index"
+            >
+              {{ layerToPython(layer) }}
+            </li>
+          </ul>
         </v-container>
       </v-col>
     </v-row>
@@ -98,21 +107,21 @@ export default {
       layerNames: Object.keys(layers),
       response_hyperparameter: {},
       response: {},
-      code: ""
     };
   },
 
   components: {
     Card,
-    SignInButton
+    SignInButton,
   },
   methods: {
     layerToPython(object) {
+      console.log(object);
       var line = `${object.name}(`;
-      for (let [key, value] of Object.entries(object.hyperparameters)) {
-        line += key + " = " + value.value + ",";
+      for (let [key, value] of Object.entries(object.hyperparameter)) {
+        line += key + " = " + value + ", ";
       }
-      line = line.substring(0, line.length - 1);
+      line = line.substring(0, line.length - 2);
       line += ")";
       return line;
     },
@@ -125,17 +134,16 @@ export default {
       this.dialog = false;
       this.response = {
         name: this.layerName,
-        hyperparameter: this.response_hyperparameter
+        hyperparameter: this.response_hyperparameter,
       };
       this.layer_state.push(this.response);
       this.response = {};
       this.response_hyperparameter = {};
-      this.code = layerToPython(this.response);
     },
 
     removeLayer(index) {
       this.$delete(this.layer_state, index);
-    }
-  }
+    },
+  },
 };
 </script>
