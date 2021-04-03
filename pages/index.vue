@@ -27,6 +27,7 @@
                   <Card
                     v-bind:layerData="layer"
                     v-bind:method="removeLayer"
+                    v-bind:edit="editLayer"
                     v-bind:index="index"
                   />
                 </v-row>
@@ -42,6 +43,9 @@
             </v-btn>
           </v-col>
           <v-col>
+            <v-btn color="#ff9000" @click="saveModel">
+              <v-text class="savemodel">Save Model</v-text>
+            </v-btn>
             <v-btn color="#ff9000" @click="saveModel">
               <v-text class="savemodel">Save Model</v-text>
             </v-btn>
@@ -154,6 +158,9 @@ export default {
       layerNames: Object.keys(layers),
       response_hyperparameter: {},
       response: {},
+      edited: false,
+      index: 0,
+      projectName: "",
     };
   },
 
@@ -165,6 +172,7 @@ export default {
   methods: {
     layerToPython(object) {
       console.log(object);
+
       var line = `${object.name}(`;
       for (let [key, value] of Object.entries(object.hyperparameter)) {
         line += key + " = " + value + ", ";
@@ -180,7 +188,20 @@ export default {
         name: this.layerName,
         hyperparameter: this.response_hyperparameter,
       };
-      this.layer_state.push(this.response);
+
+      if (!this.edited) {
+        this.layer_state.push(this.response);
+      } else {
+        this.layer_state[this.index] = this.response;
+        this.edited = false;
+      }
+
+      if (!this.edited) {
+        this.layer_state.push(this.response);
+      } else {
+        this.layer_state.splice(this.index, 0, this.response);
+        this.edited = false;
+      }
       this.response = {};
       this.response_hyperparameter = {};
     },
@@ -209,7 +230,8 @@ export default {
         firebase
           .firestore()
           .collection("models")
-          .add({ uid, model_name, ...this.layer_state });
+          .doc(uid)
+          .set({ model_name, layers: this.layer_state });
       }
       this.response_hyperparameter = {};
       this.response = {};
@@ -224,6 +246,17 @@ export default {
       this.response_hyperparameter = {};
       this.response = {};
       this.layer_state = [];
+    },
+
+    editLayer(index) {
+      for (const hyper in this.layer_state[index].hyperparameter) {
+        this.response_hyperparameter[hyper] = this.layer_state[
+          index
+        ].hyperparameter[hyper];
+      }
+      this.layerName = this.layer_state[index].name;
+      this.dialog = true;
+      this.edited = true;
     },
 
     copyToClipBoard() {
