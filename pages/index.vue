@@ -18,7 +18,7 @@
             <h2>Layers:</h2>
             <draggable
               v-model="layer_state"
-              group="people"
+              group="layers"
               @start="drag = true"
               @end="drag = false"
             >
@@ -112,16 +112,21 @@
       </v-col>
       <v-col cols="6">
         <v-container>
-          <h2>Code:</h2>
           <ul class="list-group">
+            <v-row>
+              <v-col cols="3"><h2>Code:</h2></v-col>
+              <v-col cols="9" align="end">
+                <v-btn class="icon" @click="copyToClipBoard">
+                  <v-icon>mdi-clipboard-text-multiple-outline</v-icon>
+                </v-btn>
+              </v-col>
+            </v-row>
             <li
               class="list-group-item"
               v-for="(layer, index) in layer_state"
               :key="index"
             >
-              <code v-highlight="code" class="python">{{
-                layerToPython(layer),
-              }}</code>
+              {{ layerToPython(layer) }}
             </li>
           </ul>
         </v-container>
@@ -190,6 +195,9 @@ export default {
 
     removeLayer(index) {
       this.$delete(this.layer_state, index);
+    },
+    copyToClipBoard() {
+      console.log("copied");
     }
   }
 };
@@ -206,5 +214,16 @@ export default {
 
 .formText {
   font-size: 1.2rem;
+}
+
+.icon {
+  transform: scale(0.8);
+}
+.list-group {
+  margin-top: 1rem;
+  border: 1px solid #5e5d5c;
+  padding-left: 5rem;
+  padding: 1rem;
+  box-shadow: 2px 1px rgb(177, 177, 177), 1px 2px rgb(197, 197, 197);
 }
 </style>
