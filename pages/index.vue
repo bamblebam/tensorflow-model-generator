@@ -17,23 +17,25 @@
 
         <v-row>
           <v-col cols="12">
-            <draggable
-              v-model="layer_state"
-              group="layers"
-              @start="drag = true"
-              @end="drag = false"
-            >
-              <v-item v-for="(layer, index) in layer_state" :key="index">
-                <v-row no-gutters>
-                  <Card
-                    v-bind:layerData="layer"
-                    v-bind:method="removeLayer"
-                    v-bind:edit="editLayer"
-                    v-bind:index="index"
-                  />
-                </v-row>
-              </v-item>
-            </draggable>
+            <v-card class="overflow-y-auto" max-height="400">
+              <draggable
+                v-model="layer_state"
+                group="layers"
+                @start="drag = true"
+                @end="drag = false"
+              >
+                <v-item v-for="(layer, index) in layer_state" :key="index">
+                  <v-row no-gutters>
+                    <Card
+                      v-bind:layerData="layer"
+                      v-bind:method="removeLayer"
+                      v-bind:edit="editLayer"
+                      v-bind:index="index"
+                    />
+                  </v-row>
+                </v-item>
+              </draggable>
+            </v-card>
           </v-col>
         </v-row>
 
@@ -205,6 +207,28 @@ export default {
 
     addLayer() {
       this.dialog = false;
+      let keys = Object.keys(this.response_hyperparameter);
+      console.log(keys);
+      let keys2 = Object.keys(
+        this.layersTemplate[this.layerName].hyperparameters
+      );
+      console.log(keys2);
+
+      for (const key in keys2) {
+        let name = keys2[key];
+        console.log(name);
+
+        if (name in keys) {
+          continue;
+        } else {
+          console.log(
+            this.layersTemplate[this.layerName].hyperparameters[name].value
+          );
+          this.response_hyperparameter[name] = this.layersTemplate[
+            this.layerName
+          ].hyperparameters[name].value;
+        }
+      }
       this.response = {
         name: this.layerName,
         hyperparameter: this.response_hyperparameter
