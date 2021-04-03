@@ -218,7 +218,7 @@ export default {
         let name = keys2[key];
         console.log(name);
 
-        if (name in keys) {
+        if (keys.includes(name)) {
           continue;
         } else {
           console.log(
