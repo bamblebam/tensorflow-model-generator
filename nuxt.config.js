@@ -59,8 +59,12 @@ export default {
           database: true,
         }
       }
-    ]
+    ],
+    ['nuxt-highlightjs', {
+      style: 'obsidian'
+    }]
   ],
+
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
