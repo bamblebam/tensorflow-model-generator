@@ -13,9 +13,10 @@
     </v-row>
     <v-row>
       <v-col cols="6">
+        <h2>Layers:</h2>
+
         <v-row>
           <v-col cols="12">
-            <h2>Layers:</h2>
             <draggable
               v-model="layer_state"
               group="layers"
@@ -36,7 +37,7 @@
           </v-col>
         </v-row>
 
-        <v-row>
+        <v-row align="center">
           <v-col>
             <v-btn class="mx-2" fab dark color="#ff7000" @click="dialog = true">
               <v-icon dark> mdi-plus </v-icon>
@@ -50,6 +51,8 @@
             >
               <v-text class="savemodel">Save Model</v-text>
             </v-btn>
+          </v-col>
+          <v-col>
             <v-btn
               v-if="layer_state.length > 0"
               color="#ff9000"
@@ -122,8 +125,9 @@
           </v-card>
         </v-dialog>
       </v-col>
+
       <v-col cols="6">
-        <v-container>
+        <v-container grid-list-md>
           <ul class="list-group">
             <v-row>
               <v-col cols="3"><h2>Code:</h2></v-col>
@@ -169,7 +173,7 @@ export default {
       edited: false,
       index: 0,
       projectName: "",
-      user: null,
+      user: null
     };
   },
 
@@ -184,7 +188,7 @@ export default {
   components: {
     Card,
     draggable,
-    SignInButton,
+    SignInButton
   },
   methods: {
     layerToPython(object) {
@@ -203,7 +207,7 @@ export default {
       this.dialog = false;
       this.response = {
         name: this.layerName,
-        hyperparameter: this.response_hyperparameter,
+        hyperparameter: this.response_hyperparameter
       };
 
       if (!this.edited) {
@@ -225,7 +229,7 @@ export default {
           .firestore()
           .collection("users")
           .doc(this.$store.state.user.uid);
-        userref.get().then((doc) => {
+        userref.get().then(doc => {
           if (!doc.exists) {
             userref.set({ models: [uid], ...this.$store.state.user });
           }
@@ -235,7 +239,7 @@ export default {
           .collection("users")
           .doc(this.$store.state.user.uid)
           .update({
-            models: firebase.firestore.FieldValue.arrayUnion(uid),
+            models: firebase.firestore.FieldValue.arrayUnion(uid)
           });
         firebase
           .firestore()
@@ -271,8 +275,8 @@ export default {
 
     copyToClipBoard() {
       console.log("copied");
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -293,7 +297,7 @@ export default {
   transform: scale(0.8);
 }
 .list-group {
-  margin-top: 1rem;
+  margin-top: 2.3rem;
   border: 1px solid #5e5d5c;
   padding-left: 5rem;
   padding: 1rem;

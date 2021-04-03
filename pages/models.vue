@@ -67,6 +67,7 @@ export default {
       const model = this.models[index];
       console.log(model);
       this.$store.commit("addModel", model);
+      this.$router.push("/");
     }
   }
 
