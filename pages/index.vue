@@ -209,7 +209,7 @@ export default {
       if (!this.edited) {
         this.layer_state.push(this.response);
       } else {
-        this.layer_state.splice(this.index, 0, this.response);
+        this.layer_state[this.index] = this.response;
         this.edited = false;
       }
       this.response = {};
