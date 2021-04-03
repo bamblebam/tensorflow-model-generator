@@ -315,15 +315,8 @@ export default {
       } catch (error) {
         console.log(error);
       }
-<<<<<<< HEAD
     },
   },
-=======
-
-      console.log("copied");
-    }
-  }
->>>>>>> e2cfd958800ce874a69a26b2534d24d9f3db7858
 };
 </script>
 
