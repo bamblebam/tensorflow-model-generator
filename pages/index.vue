@@ -6,7 +6,11 @@
           <v-col cols="12">
             <v-item v-for="(layer, index) in layer_state" :key="index">
               <v-row>
-                <Card v-bind:layerData="layer" />
+                <Card
+                  v-bind:layerData="layer"
+                  v-bind:method="removeLayer"
+                  v-bind:index="index"
+                />
               </v-row>
             </v-item>
           </v-col>
@@ -48,14 +52,20 @@ export default {
       line += ")";
       return line;
     },
+
     test() {
       console.log(this.layersTemplate);
     },
+
     addLayer() {
       const object = {
         name: "jugik",
       };
       this.layer_state.push(object);
+    },
+
+    removeLayer(index) {
+      this.$delete(this.layer_state, index);
     },
   },
 };

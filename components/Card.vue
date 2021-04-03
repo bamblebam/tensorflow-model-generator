@@ -4,7 +4,9 @@
       <v-card-title>
         <v-row>
           <v-col cols="10">Layer : {{ this.layerData.name }}</v-col>
-          <v-col cols="2" align-self="end"><v-icon>mdi-delete</v-icon></v-col>
+          <v-col cols="2" align-self="end"
+            ><v-icon @click="method(index)">mdi-delete</v-icon></v-col
+          >
         </v-row>
       </v-card-title>
       <v-card-text>
@@ -18,7 +20,7 @@
 
 <script>
 export default {
-  props: ["layerData"]
+  props: ["layerData", "method", "index"],
 };
 </script>
 
