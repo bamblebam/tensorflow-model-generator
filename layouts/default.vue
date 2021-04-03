@@ -12,10 +12,14 @@
               </v-list-item-avatar>
             </v-list-item>
 
-            <v-list-item link>
+            <v-list-item link v-if="this.$store.state.user !== null">
               <v-list-item-content>
-                <v-list-item-title class="title"> Test user </v-list-item-title>
-                <v-list-item-subtitle>test_user@gmail.com</v-list-item-subtitle>
+                <v-list-item-title class="title">{{
+                  this.$store.state.user.username
+                }}</v-list-item-title>
+                <v-list-item-subtitle>{{
+                  this.$store.state.user.email
+                }}</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
           </v-list>
@@ -29,17 +33,22 @@
               </v-list-item-icon>
               <v-list-item-title>Home</v-list-item-title>
             </v-list-item>
-            <v-list-item to="/models">
+            <v-list-item v-if="this.$store.state.user !== null" to="/models">
               <v-list-item-icon>
                 <v-icon>mdi-book</v-icon>
               </v-list-item-icon>
               <v-list-item-title>My models</v-list-item-title>
             </v-list-item>
-            <v-list-item>
+            <v-list-item
+              v-if="this.$store.state.user !== null"
+              @click="signout"
+            >
               <v-list-item-icon>
                 <v-icon>mdi-exit-to-app</v-icon>
               </v-list-item-icon>
-              <v-list-item-title>Logout</v-list-item-title>
+              <v-list-item-title v-if="this.$store.state.user !== null"
+                >Logout</v-list-item-title
+              >
             </v-list-item>
           </v-list>
         </v-navigation-drawer>
@@ -66,7 +75,11 @@ export default {
   },
   mounted() {
     this.user = this.$store.state.user;
-    console.log(this.user);
+  },
+  methods: {
+    signout() {
+      this.$store.commit("logoutUser");
+    },
   },
 };
 </script>

@@ -50,7 +50,11 @@
             >
               <v-text class="savemodel">Save Model</v-text>
             </v-btn>
-            <v-btn color="#ff9000" @click="saveModel">
+            <v-btn
+              v-if="layer_state.length > 0"
+              color="#ff9000"
+              @click="saveModel"
+            >
               <v-text class="savemodel">Discard Model</v-text>
             </v-btn>
           </v-col>
