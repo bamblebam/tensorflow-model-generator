@@ -46,7 +46,7 @@
           </v-col>
           <v-col>
             <v-btn color="#ff9000" @click="saveModel">
-              <v-text class="savemodel">Save Model</v-text>
+              <v-card-text class="savemodel">Save Model</v-card-text>
             </v-btn>
           </v-col>
         </v-row>
@@ -151,7 +151,7 @@ export default {
   data() {
     return {
       dialog: false,
-      layer_state: [],
+      layer_state: this.$store.state.model || [],
       layersTemplate: layers,
       layerName: "Dense",
       layerNames: Object.keys(layers),
@@ -159,8 +159,13 @@ export default {
       response: {},
       edited: false,
       index: 0,
-      projectName: ""
+      project_name: ""
     };
+  },
+
+  mounted() {
+    var model = this.$store.state.model;
+    console.log(model);
   },
 
   components: {

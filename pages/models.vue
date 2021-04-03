@@ -2,14 +2,20 @@
   <v-container>
     <h1>My models:</h1>
     <v-btn @click="load">Load </v-btn>
-    <v-card v-for="model in models" :key="model.name">
-      <v-card-title class="text">{{ model.model_name }}</v-card-title>
-      <v-card-subtitle>Project date</v-card-subtitle>
-      <v-btn class="text">Discard model</v-btn>
-      <v-btn color="#ff7000">
-        <v-text class="secText">Download model</v-text>
-      </v-btn>
-    </v-card>
+    <v-row v-for="(model, index) in models" :key="index">
+      <v-col cols="12">
+        <v-card>
+          <v-card-title class="text">{{ model.model_name }}</v-card-title>
+          <v-card-subtitle>Project date</v-card-subtitle>
+          <v-btn class="text" @click="setModel(index)" v-bind:index="index"
+            >Set Current</v-btn
+          >
+          <v-btn color="#ff7000">
+            <v-text class="secText">Download model</v-text>
+          </v-btn>
+        </v-card>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -52,6 +58,11 @@ export default {
           });
         });
       console.log(this.models);
+    },
+    setModel(index) {
+      const model = this.models[index];
+      console.log(model);
+      this.$store.commit("addModel", model);
     }
   }
 
