@@ -42,8 +42,8 @@
             </v-btn>
           </v-col>
           <v-col>
-            <v-btn @click="saveModel">
-              Save Model
+            <v-btn color="#ff9000" @click="saveModel">
+              <v-text class="savemodel">Save Model</v-text>
             </v-btn>
           </v-col>
         </v-row>
@@ -225,5 +225,8 @@ export default {
   padding-left: 5rem;
   padding: 1rem;
   box-shadow: 2px 1px rgb(177, 177, 177), 1px 2px rgb(197, 197, 197);
+}
+.savemodel {
+  color: white;
 }
 </style>
