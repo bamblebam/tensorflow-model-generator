@@ -55,11 +55,7 @@
             </v-btn>
           </v-col>
           <v-col>
-            <v-btn
-              v-if="layer_state.length > 0"
-              color="#ff9000"
-              @click="saveModel"
-            >
+            <v-btn color="#ff9000" @click="saveModel">
               <v-text class="savemodel">Discard Model</v-text>
             </v-btn>
           </v-col>
@@ -182,11 +178,12 @@ export default {
   },
 
   mounted() {
-    var model = this.$store.state.model;
+    var model = this.$store.state.model.layers;
+    var projectName = this.$store.state.model.model_name;
     this.user = this.$store.state.user;
     if (model) {
-      this.layer_state = model.layers;
-      this.project_name = model.model_name;
+      this.layer_state = model;
+      this.project_name = projectName;
     }
   },
 
