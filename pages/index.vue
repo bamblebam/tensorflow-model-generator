@@ -4,7 +4,7 @@
       <v-col cols="3">
         <v-text-field
           placeholder="Project Name"
-          v-model="projectName"
+          v-model="project_name"
         ></v-text-field>
       </v-col>
       <v-col cols="9" align="end">
@@ -38,8 +38,10 @@
 
         <v-row>
           <v-col>
-            <v-btn color="#ff7000" @click="dialog = true">
-              <v-icon color="white">mdi-plus-thick</v-icon>
+            <v-btn class="mx-2" fab dark color="#ff7000" @click="dialog = true">
+              <v-icon dark>
+                mdi-plus
+              </v-icon>
             </v-btn>
           </v-col>
           <v-col>
@@ -189,13 +191,6 @@ export default {
       if (!this.edited) {
         this.layer_state.push(this.response);
       } else {
-        this.layer_state[this.index] = this.response;
-        this.edited = false;
-      }
-
-      if (!this.edited) {
-        this.layer_state.push(this.response);
-      } else {
         this.layer_state.splice(this.index, 0, this.response);
         this.edited = false;
       }
@@ -206,7 +201,7 @@ export default {
     saveModel() {
       if (this.layer_state && this.$store.state.user) {
         var uid = uuidv4();
-        var model_name = this.projectName;
+        var model_name = this.project_name;
         console.log(model_name);
         const userref = firebase
           .firestore()
