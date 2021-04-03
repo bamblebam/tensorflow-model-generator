@@ -77,6 +77,8 @@
                     class="text"
                     v-else
                     label="value"
+                    background-color="white"
+                    color="#ff7000"
                     :type="hyperparameter.form.type"
                     v-model="response_hyperparameter[hyperparameter.name]"
                     :value="hyperparameter.value"
