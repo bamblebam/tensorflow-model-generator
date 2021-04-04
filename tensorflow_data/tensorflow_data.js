@@ -8,8 +8,18 @@ const initializers = [
   "'ones'",
   "'zeros'"
 ];
-const regularizers = ["'l1'", "'l2'"]
-const activations = ["'relu'", "'selu'", "'elu'", "'gelu'", "'exponential'", "'linear'", "'tanh'", "'softmax'", "'softplus'"]
+const regularizers = ["'l1'", "'l2'"];
+const activations = [
+  "'relu'",
+  "'selu'",
+  "'elu'",
+  "'gelu'",
+  "'exponential'",
+  "'linear'",
+  "'tanh'",
+  "'softmax'",
+  "'softplus'"
+];
 const bool = ["True", "False"];
 
 const layers = {
@@ -94,7 +104,7 @@ const layers = {
       strides: {
         name: "strides",
         form: {
-          type: 'int'
+          type: "int"
         },
         value: 1
       },
@@ -169,7 +179,7 @@ const layers = {
       strides: {
         name: "strides",
         form: {
-          type: 'int'
+          type: "int"
         },
         value: "(1, 1)"
       },
@@ -243,7 +253,7 @@ const layers = {
       strides: {
         name: "strides",
         form: {
-          type: 'int'
+          type: "int"
         },
         value: 1
       },
@@ -318,7 +328,7 @@ const layers = {
       strides: {
         name: "strides",
         form: {
-          type: 'int'
+          type: "int"
         },
         value: "(1, 1)"
       },
@@ -376,14 +386,14 @@ const layers = {
     name: "AveragePooling1D",
     hyperparameters: {
       pool_size: {
-        name: 'pool_size',
+        name: "pool_size",
         form: {
           type: "int"
         },
         value: 2
       },
       strides: {
-        name: 'strides',
+        name: "strides",
         form: {
           type: "int"
         },
@@ -403,14 +413,14 @@ const layers = {
     name: "AveragePooling2D",
     hyperparameters: {
       pool_size: {
-        name: 'pool_size',
+        name: "pool_size",
         form: {
           type: "int"
         },
         value: 2
       },
       strides: {
-        name: 'strides',
+        name: "strides",
         form: {
           type: "int"
         },
@@ -430,7 +440,7 @@ const layers = {
     name: "Dropout",
     hyperparameters: {
       rate: {
-        name: 'rate',
+        name: "rate",
         form: {
           type: "int"
         },
@@ -469,7 +479,7 @@ const layers = {
         name: "data_format",
         form: {
           type: "dropdown",
-          options: ['channels_first', 'channels_last']
+          options: ["channels_first", "channels_last"]
         },
         value: "None"
       }
@@ -566,7 +576,7 @@ const layers = {
         name: "data_format",
         form: {
           type: "dropdown",
-          options: ['channels_first', 'channels_last']
+          options: ["channels_first", "channels_last"]
         },
         value: "None"
       }
@@ -601,7 +611,7 @@ const layers = {
         name: "data_format",
         form: {
           type: "dropdown",
-          options: ['channels_first', 'channels_last']
+          options: ["channels_first", "channels_last"]
         },
         value: "None"
       }
@@ -614,7 +624,7 @@ const layers = {
         name: "data_format",
         form: {
           type: "dropdown",
-          options: ['channels_first', 'channels_last']
+          options: ["channels_first", "channels_last"]
         },
         value: "None"
       }
@@ -627,7 +637,7 @@ const layers = {
         name: "data_format",
         form: {
           type: "dropdown",
-          options: ['channels_first', 'channels_last']
+          options: ["channels_first", "channels_last"]
         },
         value: "None"
       }
@@ -640,7 +650,7 @@ const layers = {
         name: "data_format",
         form: {
           type: "dropdown",
-          options: ['channels_first', 'channels_last']
+          options: ["channels_first", "channels_last"]
         },
         value: "None"
       }
@@ -653,7 +663,7 @@ const layers = {
         name: "data_format",
         form: {
           type: "dropdown",
-          options: ['channels_first', 'channels_last']
+          options: ["channels_first", "channels_last"]
         },
         value: "None"
       }
