@@ -469,7 +469,7 @@ const layers = {
         name: "data_format",
         form: {
           type: "dropdown",
-          options: "['channels_first' , 'channels_last']"
+          options: ['channels_first', 'channels_last']
         },
         value: "None"
       }
@@ -566,7 +566,7 @@ const layers = {
         name: "data_format",
         form: {
           type: "dropdown",
-          options: "['channels_first' , 'channels_last']"
+          options: ['channels_first', 'channels_last']
         },
         value: "None"
       }
@@ -601,7 +601,7 @@ const layers = {
         name: "data_format",
         form: {
           type: "dropdown",
-          options: "['channels_first' , 'channels_last']"
+          options: ['channels_first', 'channels_last']
         },
         value: "None"
       }
@@ -614,7 +614,7 @@ const layers = {
         name: "data_format",
         form: {
           type: "dropdown",
-          options: "['channels_first' , 'channels_last']"
+          options: ['channels_first', 'channels_last']
         },
         value: "None"
       }
@@ -627,7 +627,7 @@ const layers = {
         name: "data_format",
         form: {
           type: "dropdown",
-          options: "['channels_first' , 'channels_last']"
+          options: ['channels_first', 'channels_last']
         },
         value: "None"
       }
@@ -640,7 +640,7 @@ const layers = {
         name: "data_format",
         form: {
           type: "dropdown",
-          options: "['channels_first' , 'channels_last']"
+          options: ['channels_first', 'channels_last']
         },
         value: "None"
       }
@@ -653,7 +653,7 @@ const layers = {
         name: "data_format",
         form: {
           type: "dropdown",
-          options: "['channels_first' , 'channels_last']"
+          options: ['channels_first', 'channels_last']
         },
         value: "None"
       }
@@ -744,16 +744,16 @@ const layers = {
         value: -1
       },
       momentum: {
-        name: momentum,
+        name: "momentum",
         form: {
-          type: float
+          type: "float"
         },
         value: 0.99
       },
       epsilon: {
-        name: epsilon,
+        name: "epsilon",
         form: {
-          type: float
+          type: "float"
         },
         value: 0.001
       },
