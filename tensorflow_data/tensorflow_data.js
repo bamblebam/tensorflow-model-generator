@@ -319,6 +319,18 @@ const layers = {
         value: "None"
       }
     }
+  },
+  GaussianNoise: {
+    name: "GaussianNoise",
+    hyperparameters: {
+      stddev: {
+        name: "stddev",
+        form: {
+          type: "float"
+        },
+        value: "None"
+      }
+    }
   }
 };
 
