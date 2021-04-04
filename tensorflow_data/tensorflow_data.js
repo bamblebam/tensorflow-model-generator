@@ -405,16 +405,16 @@ const layers = {
         value: -1
       },
       momentum: {
-        name: momentum,
+        name: "momentum",
         form: {
-          type: float
+          type: "float"
         },
         value: 0.99
       },
       epsilon: {
-        name: epsilon,
+        name: "epsilon",
         form: {
-          type: float
+          type: "float"
         },
         value: 0.001
       },
