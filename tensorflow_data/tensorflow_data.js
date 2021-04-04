@@ -393,6 +393,48 @@ const layers = {
         value: "zeros"
       }
     }
+  },
+  BatchNormalization: {
+    name: "BatchNormalization",
+    hyperparameters: {
+      axis: {
+        name: "axis",
+        form: {
+          type: "int"
+        },
+        value: -1
+      },
+      momentum: {
+        name: momentum,
+        form: {
+          type: float
+        },
+        value: 0.99
+      },
+      epsilon: {
+        name: epsilon,
+        form: {
+          type: float
+        },
+        value: 0.001
+      },
+      center: {
+        name: "center",
+        form: {
+          type: "dropdown",
+          options: bool
+        },
+        value: "True"
+      },
+      scale: {
+        name: "scale",
+        form: {
+          type: "dropdown",
+          options: bool
+        },
+        value: "True"
+      }
+    }
   }
 };
 
