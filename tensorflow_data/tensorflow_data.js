@@ -91,6 +91,13 @@ const layers = {
         },
         value: 2
       },
+      strides: {
+        name: "strides",
+        form: {
+          type: 'int'
+        },
+        value: 1
+      },
       padding: {
         name: "padding",
         form: {
@@ -102,9 +109,10 @@ const layers = {
       activation: {
         name: "activation",
         form: {
-          type: "dropdown"
+          type: "dropdown",
+          options: activations
         },
-        value: activations
+        value: "None"
       },
       kernel_initializer: {
         name: "kernel_initializer",
@@ -158,6 +166,13 @@ const layers = {
         },
         value: 2
       },
+      strides: {
+        name: "strides",
+        form: {
+          type: 'int'
+        },
+        value: "(1, 1)"
+      },
       padding: {
         name: "padding",
         form: {
@@ -169,9 +184,10 @@ const layers = {
       activation: {
         name: "activation",
         form: {
-          type: "dropdown"
+          type: "dropdown",
+          options: activations
         },
-        value: activations
+        value: "None"
       },
       kernel_initializer: {
         name: "kernel_initializer",
@@ -224,6 +240,13 @@ const layers = {
         },
         value: 2
       },
+      strides: {
+        name: "strides",
+        form: {
+          type: 'int'
+        },
+        value: 1
+      },
       padding: {
         name: "padding",
         form: {
@@ -235,9 +258,10 @@ const layers = {
       activation: {
         name: "activation",
         form: {
-          type: "dropdown"
+          type: "dropdown",
+          options: activations
         },
-        value: activations
+        value: "None"
       },
       kernel_initializer: {
         name: "kernel_initializer",
@@ -291,6 +315,13 @@ const layers = {
         },
         value: 2
       },
+      strides: {
+        name: "strides",
+        form: {
+          type: 'int'
+        },
+        value: "(1, 1)"
+      },
       padding: {
         name: "padding",
         form: {
@@ -302,9 +333,10 @@ const layers = {
       activation: {
         name: "activation",
         form: {
-          type: "dropdown"
+          type: "dropdown",
+          options: activations
         },
-        value: activations
+        value: "None"
       },
       kernel_initializer: {
         name: "kernel_initializer",
@@ -393,6 +425,22 @@ const layers = {
         value: "valid"
       }
     }
+  },
+  Dropout: {
+    name: "Dropout",
+    hyperparameters: {
+      rate: {
+        name: 'rate',
+        form: {
+          type: "int"
+        },
+        value: 0.5
+      }
+    }
+  },
+  Flatten: {
+    name: "Flatten",
+    hyperparameters: {}
   }
 };
 
