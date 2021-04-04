@@ -293,6 +293,32 @@ const layers = {
         value: "None"
       }
     }
+  },
+  GlobalAveragePooling1D: {
+    name: "GlobalAveragePooling1D",
+    hyperparameters: {
+      data_format: {
+        name: "data_format",
+        form: {
+          type: "dropdown",
+          options: "['channels_first' , 'channels_last']"
+        },
+        value: "None"
+      }
+    }
+  },
+  GlobalAveragePooling2D: {
+    name: "GlobalAveragePooling2D",
+    hyperparameters: {
+      data_format: {
+        name: "data_format",
+        form: {
+          type: "dropdown",
+          options: "['channels_first' , 'channels_last']"
+        },
+        value: "None"
+      }
+    }
   }
 };
 
