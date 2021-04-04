@@ -147,6 +147,56 @@ const layers = {
         value: (0, 1)
       }
     }
+  },
+  LSTM: {
+    name: "LSTM",
+    hyperparameters: {
+      units: {
+        name: "units",
+        form: {
+          type: "int"
+        },
+        value: 32
+      },
+      activation: {
+        name: "activation",
+        form: {
+          type: "string"
+        },
+        value: "tanh"
+      },
+      use_bias: {
+        name: "use_bias",
+        form: {
+          type: "dropdown",
+          options: bool
+        },
+        value: "True"
+      },
+      recurrent_activation: {
+        name: "recurrent_activation",
+        form: {
+          type: "string"
+        },
+        value: "sigmoid"
+      },
+      kernel_initializer: {
+        name: "kernel_initializer",
+        form: {
+          type: "dropdown",
+          options: initializers
+        },
+        value: "glorot_uniform"
+      },
+      bias_initializers: {
+        name: "bias_initializer",
+        form: {
+          type: "dropdown",
+          options: initializers
+        },
+        value: "zeros"
+      }
+    }
   }
 };
 
