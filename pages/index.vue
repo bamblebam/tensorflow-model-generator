@@ -172,7 +172,7 @@ export default {
       saveEdited: false,
       index: 0,
       project_name: "",
-      user: null,
+      user: null
     };
   },
 
@@ -190,7 +190,7 @@ export default {
   components: {
     Card,
     draggable,
-    SignInButton,
+    SignInButton
   },
   methods: {
     layerToPython(object) {
@@ -232,7 +232,7 @@ export default {
 
       this.response = {
         name: this.layerName,
-        hyperparameter: this.response_hyperparameter,
+        hyperparameter: this.response_hyperparameter
       };
 
       if (!this.edited) {
@@ -260,7 +260,7 @@ export default {
           .firestore()
           .collection("users")
           .doc(this.$store.state.user.uid);
-        userref.get().then((doc) => {
+        userref.get().then(doc => {
           if (!doc.exists) {
             userref.set({ models: [uid], ...this.$store.state.user });
           }
@@ -270,7 +270,7 @@ export default {
           .collection("users")
           .doc(this.$store.state.user.uid)
           .update({
-            models: firebase.firestore.FieldValue.arrayUnion(uid),
+            models: firebase.firestore.FieldValue.arrayUnion(uid)
           });
         firebase
           .firestore()
@@ -323,8 +323,8 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
