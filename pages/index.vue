@@ -13,9 +13,10 @@
     </v-row>
     <v-row>
       <v-col cols="6">
+        <h2>Layers:</h2>
+
         <v-row>
           <v-col cols="12">
-            <h2>Layers:</h2>
             <draggable
               v-model="layer_state"
               group="layers"
@@ -36,7 +37,7 @@
           </v-col>
         </v-row>
 
-        <v-row>
+        <v-row align="center">
           <v-col>
             <v-btn class="mx-2" fab dark color="#ff7000" @click="dialog = true">
               <v-icon dark> mdi-plus </v-icon>
@@ -44,17 +45,15 @@
           </v-col>
           <v-col>
             <v-btn
-              v-if="layer_state.length > 0 && this.$store.state.user !== null"
+              v-if="this.$store.state.user !== null"
               color="#ff9000"
               @click="saveModel"
             >
-              <v-text class="savemodel">Save Model</v-text>
+              <v-card-text class="savemodel">Save Model</v-card-text>
             </v-btn>
-            <v-btn
-              v-if="layer_state.length > 0"
-              color="#ff9000"
-              @click="saveModel"
-            >
+          </v-col>
+          <v-col>
+            <v-btn color="#ff9000" @click="discardModel">
               <v-text class="savemodel">Discard Model</v-text>
             </v-btn>
           </v-col>
@@ -122,6 +121,7 @@
           </v-card>
         </v-dialog>
       </v-col>
+
       <v-col cols="6">
         <v-container>
           <ul ref="copy_code" class="list-group">
@@ -169,17 +169,21 @@ export default {
       response_hyperparameter: {},
       response: {},
       edited: false,
+      saveEdited: false,
       index: 0,
-      projectName: "",
+      project_name: "",
       user: null,
     };
   },
 
   mounted() {
     var model = this.$store.state.model.layers;
+    var projectName = this.$store.state.model.model_name;
     this.user = this.$store.state.user;
     if (model) {
-      this.layer_state = model;
+      this.layer_state = [...model];
+      this.project_name = projectName;
+      this.saveEdited = true;
     }
   },
 
@@ -203,6 +207,29 @@ export default {
 
     addLayer() {
       this.dialog = false;
+      let keys = Object.keys(this.response_hyperparameter);
+      console.log(keys);
+      let keys2 = Object.keys(
+        this.layersTemplate[this.layerName].hyperparameters
+      );
+      console.log(keys2);
+
+      for (const key in keys2) {
+        let name = keys2[key];
+        console.log(name);
+
+        if (keys.includes(name)) {
+          continue;
+        } else {
+          console.log(
+            this.layersTemplate[this.layerName].hyperparameters[name].value
+          );
+          this.response_hyperparameter[name] = this.layersTemplate[
+            this.layerName
+          ].hyperparameters[name].value;
+        }
+      }
+
       this.response = {
         name: this.layerName,
         hyperparameter: this.response_hyperparameter,
@@ -220,7 +247,13 @@ export default {
 
     saveModel() {
       if (this.layer_state && this.$store.state.user) {
-        var uid = uuidv4();
+        var uid;
+        if (!this.saveEdited) {
+          uid = uuidv4();
+        } else {
+          uid = this.$store.state.model.uid;
+          this.saveEdited = false;
+        }
         var model_name = this.project_name;
         console.log(model_name);
         const userref = firebase
@@ -255,6 +288,7 @@ export default {
     },
 
     discardModel() {
+      this.saveEdited = false;
       this.response_hyperparameter = {};
       this.response = {};
       this.layer_state = [];
@@ -266,6 +300,7 @@ export default {
           index
         ].hyperparameter[hyper];
       }
+      this.index = index;
       this.layerName = this.layer_state[index].name;
       this.dialog = true;
       this.edited = true;
@@ -310,7 +345,7 @@ export default {
   transform: scale(0.8);
 }
 .list-group {
-  margin-top: 1rem;
+  margin-top: 2.3rem;
   border: 1px solid #5e5d5c;
   padding-left: 5rem;
   padding: 1rem;
