@@ -267,6 +267,19 @@ const layers = {
         value: "None"
       }
     }
+  },
+  GlobalMaxPool1D: {
+    name: "GlobalMaxPool1D",
+    hyperparameters: {
+      data_format: {
+        name: "data_format",
+        form: {
+          type: "dropdown",
+          options: "['channels_first' , 'channels_last']"
+        },
+        value: "None"
+      }
+    }
   }
 };
 
