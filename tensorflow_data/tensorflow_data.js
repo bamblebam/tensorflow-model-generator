@@ -74,6 +74,73 @@ const layers = {
     }
   },
 
+  Conv1D: {
+    name: "Conv2D",
+    hyperparameters: {
+      filters: {
+        name: "filters",
+        form: {
+          type: "int"
+        },
+        value: 32
+      },
+      kernel_size: {
+        name: "kernel_size",
+        form: {
+          type: "int"
+        },
+        value: 2
+      },
+      padding: {
+        name: "padding",
+        form: {
+          type: "dropdown",
+          options: ["same", "valid"]
+        },
+        value: "valid"
+      },
+      activation: {
+        name: "activation",
+        form: {
+          type: "dropdown"
+        },
+        value: activations
+      },
+      kernel_initializer: {
+        name: "kernel_initializer",
+        form: {
+          type: "dropdown",
+          options: initializers
+        },
+        value: "glorot_uniform"
+      },
+      bias_initializers: {
+        name: "bias_initializer",
+        form: {
+          type: "dropdown",
+          options: initializers
+        },
+        value: "zeros"
+      },
+      kernel_regularizers: {
+        name: "kernel_regularizers",
+        form: {
+          type: "dropdown",
+          options: regularizers
+        },
+        value: "None"
+      },
+      bias_regularizerss: {
+        name: "bias_regularizers",
+        form: {
+          type: "dropdown",
+          options: regularizers
+        },
+        value: "None"
+      }
+    }
+  },
+
   Conv2D: {
     name: "Conv2D",
     hyperparameters: {
