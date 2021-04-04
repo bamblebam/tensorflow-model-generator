@@ -95,7 +95,7 @@ const layers = {
         name: "padding",
         form: {
           type: "dropdown",
-          options: ["same", "valid"]
+          options: ["'same'", "'valid'"]
         },
         value: "valid"
       },
@@ -162,7 +162,7 @@ const layers = {
         name: "padding",
         form: {
           type: "dropdown",
-          options: ["same", "valid"]
+          options: ["'same'", "'valid'"]
         },
         value: "valid"
       },
@@ -228,7 +228,7 @@ const layers = {
         name: "padding",
         form: {
           type: "dropdown",
-          options: ["same", "valid"]
+          options: ["'same'", "'valid'"]
         },
         value: "valid"
       },
@@ -295,7 +295,7 @@ const layers = {
         name: "padding",
         form: {
           type: "dropdown",
-          options: ["same", "valid"]
+          options: ["'same'", "'valid'"]
         },
         value: "valid"
       },
@@ -337,6 +337,60 @@ const layers = {
           options: regularizers
         },
         value: "None"
+      }
+    }
+  },
+  AveragePooling1D: {
+    name: "AveragePooling1D",
+    hyperparameters: {
+      pool_size: {
+        name: 'pool_size',
+        form: {
+          type: "int"
+        },
+        value: 2
+      },
+      strides: {
+        name: 'strides',
+        form: {
+          type: "int"
+        },
+        value: "None"
+      },
+      padding: {
+        name: "padding",
+        form: {
+          type: "dropdown",
+          options: ["'same'", "'valid'"]
+        },
+        value: "valid"
+      }
+    }
+  },
+  AveragePooling2D: {
+    name: "AveragePooling2D",
+    hyperparameters: {
+      pool_size: {
+        name: 'pool_size',
+        form: {
+          type: "int"
+        },
+        value: 2
+      },
+      strides: {
+        name: 'strides',
+        form: {
+          type: "int"
+        },
+        value: "None"
+      },
+      padding: {
+        name: "padding",
+        form: {
+          type: "dropdown",
+          options: ["'same'", "'valid'"]
+        },
+        value: "valid"
       }
     }
   }
