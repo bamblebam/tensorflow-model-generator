@@ -197,6 +197,41 @@ const layers = {
         value: "zeros"
       }
     }
+  },
+  MaxPool1D: {
+    name: "MaxPool1D",
+    hyperparameters: {
+      pool_size: {
+        name: "pool_size",
+        form: {
+          type: "int"
+        },
+        value: 2
+      },
+      strides: {
+        name: "strides",
+        form: {
+          type: "int"
+        },
+        value: "None"
+      },
+      padding: {
+        name: "padding",
+        form: {
+          type: "dropdown",
+          options: ["same", "valid"]
+        },
+        value: "valid"
+      },
+      data_format: {
+        name: "data_format",
+        form: {
+          type: "dropdown",
+          options: "['channels_first' , 'channels_last']"
+        },
+        value: "None"
+      }
+    }
   }
 };
 
