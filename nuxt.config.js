@@ -20,10 +20,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-    '~plugins/firebase.js',
-    '~plugins/persistedState.client.js'
-  ],
+  plugins: ["~plugins/firebase.js", "~plugins/persistedState.client.js"],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -31,7 +28,8 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
-    "@nuxtjs/vuetify"
+    "@nuxtjs/vuetify",
+    "@nuxtjs/pwa"
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -39,9 +37,9 @@ export default {
     // https://go.nuxtjs.dev/axios
     "@nuxtjs/axios",
     // https://go.nuxtjs.dev/pwa
-    "@nuxtjs/pwa",
+    // "@nuxtjs/pwa",
     [
-      '@nuxtjs/firebase',
+      "@nuxtjs/firebase",
       {
         config: {
           apiKey: "AIzaSyA6ZHaxj5F2KlPXB1lcDSIUao-LTowPRH8",
@@ -56,16 +54,18 @@ export default {
           firestore: true,
           functions: true,
           storage: true,
-          database: true,
+          database: true
         }
       }
     ],
-    ['nuxt-highlightjs', {
-      style: 'obsidian'
-    }],
-    'nuxt-clipboard2',
+    [
+      "nuxt-highlightjs",
+      {
+        style: "obsidian"
+      }
+    ],
+    "nuxt-clipboard2"
   ],
-
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
